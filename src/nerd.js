@@ -107,18 +107,20 @@ document.querySelectorAll("accordion").forEach((accordion) => {
   }
   accordion.querySelectorAll("accordionItem").forEach((item) => {
     item.style.display = "block";
-    item.style.borderTop = `1px solid ${colorChanger(0.8, colorScheme())}`;
+    item.style.borderTop = `1px solid ${colorChanger(0.75, colorScheme())}`;
   });
   accordion.querySelectorAll("accordionItem:last-child").forEach((item) => {
     item.style.display = "block";
-    item.style.borderBottom = `1px solid ${colorChanger(0.8, colorScheme())}`;
+    item.style.borderBottom = `1px solid ${colorChanger(0.75, colorScheme())}`;
   });
   accordion.querySelectorAll("accordionButton").forEach((btn) => {
-    btn.style.display = "block";
+    btn.style.display = "flex";
+    btn.style.alignItems = "center";
+    btn.style.justifyContent = "space-between";
     btn.style.cursor = "pointer";
     btn.style.fontSize = size() + "px";
     btn.style.userSelect = "none";
-    btn.style.padding = `${size() / 2}px 0`;
+    btn.style.padding = `${size() / 2}px ${size()}px`;
     btn.style.color = colorScheme();
     btn.style.transition = `0.08s ${easing}`;
     btn.style.backgroundColor = "#fff";
@@ -134,8 +136,12 @@ document.querySelectorAll("accordion").forEach((accordion) => {
       var panel = this.nextElementSibling;
       if (panel.style.height == panel.scrollHeight + "px") {
         panel.style.height = 0;
+        panel.style.opacity = 0;
+        this.querySelector("accordionIcon").style.transform = "rotate(45deg)";
       } else {
         panel.style.height = panel.scrollHeight + "px";
+        panel.style.opacity = 1;
+        this.querySelector("accordionIcon").style.transform = "rotate(225deg)";
       }
     });
   });
@@ -144,6 +150,20 @@ document.querySelectorAll("accordion").forEach((accordion) => {
     panel.style.overflow = "hidden";
     panel.style.height = 0;
     panel.style.fontSize = size() + "px";
-    panel.style.transition = `0.15s ${easing}`;
+    panel.style.padding = `0 ${size()}px`;
+    panel.style.transition = `0.25s ${easing}`;
+    panel.innerHTML = `<div class="inner" style="margin: ${size() / 2}px 0">${
+      panel.innerHTML
+    }</div>`;
+  });
+  accordion.querySelectorAll("accordionIcon").forEach((icon) => {
+    icon.style.transition = `0.25s ${easing}`;
+    icon.style.height = size() / 2 + "px";
+    icon.style.width = size() / 2 + "px";
+    icon.style.transform = "rotate(45deg)";
+    // prettier-ignore
+    icon.innerHTML = `
+    <div style="height: 100%; width: 100%; background-color: transparent; border: 2px solid ${colorScheme()}; border-top: none; border-left: none;"></div>
+    `;
   });
 });
