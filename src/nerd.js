@@ -322,6 +322,7 @@ document.querySelectorAll("alert").forEach((alert) => {
       break;
     }
   }
+  alert.style.width = "100%";
   alert.style.backgroundColor = colorChanger(0.75, colorScheme());
   alert.style.padding = `${size() / 1.5}px ${size()}px`;
   alert.style.display = "flex";
@@ -411,4 +412,124 @@ document.querySelectorAll("badge").forEach((badge) => {
   badge.style.borderRadius = size() / 4 + "px";
   badge.style.fontSize = size() + "px";
   badge.style.fontWeight = 600;
+});
+// button
+document.querySelectorAll("button").forEach((btn) => {
+  function colorScheme() {
+    var componentColor = btn.getAttribute("colorScheme");
+    var type = btn.getAttribute("type");
+    if (componentColor == null) {
+      switch (type) {
+        case "success": {
+          return "#38a169";
+          break;
+        }
+        case "error": {
+          return "#e53e3e";
+          break;
+        }
+        case "warning": {
+          return "#dd6b20";
+          break;
+        }
+        case "info": {
+          return "#3182ce";
+          break;
+        }
+        default: {
+          return "#718096";
+        }
+      }
+    } else {
+      return componentColor;
+    }
+  }
+  function variant() {
+    var componentVariant = btn.getAttribute("variant");
+    if (componentVariant == null) {
+      return "solid";
+    } else {
+      return componentVariant;
+    }
+  }
+  function size() {
+    var componentSize = btn.getAttribute("size");
+    if (componentSize == null) {
+      return 16;
+    } else {
+      return componentSize;
+    }
+  }
+  switch (variant()) {
+    case "solid": {
+      btn.style.backgroundColor = colorScheme();
+      btn.style.border = "0 solid transparent";
+      btn.style.color = "#fff";
+      btn.addEventListener("mouseover", function () {
+        this.style.backgroundColor = colorChanger(-0.3, colorScheme());
+      });
+      btn.addEventListener("mouseleave", function () {
+        this.style.backgroundColor = colorScheme();
+      });
+      btn.addEventListener("mousedown", function () {
+        this.style.backgroundColor = colorChanger(-0.6, colorScheme());
+      });
+      btn.addEventListener("mouseup", function () {
+        this.style.backgroundColor = colorChanger(-0.3, colorScheme());
+      });
+      break;
+    }
+    case "outline": {
+      btn.style.backgroundColor = "transparent";
+      btn.style.border = "0 solid transparent";
+      btn.style.outline = `1px solid ${colorScheme()}`;
+      btn.style.outlineOffset = -1;
+      btn.style.color = colorScheme();
+      btn.addEventListener("mouseover", function () {
+        this.style.backgroundColor = colorChanger(0.75, colorScheme());
+      });
+      btn.addEventListener("mouseleave", function () {
+        this.style.backgroundColor = "transparent";
+      });
+      btn.addEventListener("mousedown", function () {
+        this.style.backgroundColor = colorChanger(0.65, colorScheme());
+      });
+      btn.addEventListener("mouseup", function () {
+        this.style.backgroundColor = colorChanger(0.75, colorScheme());
+      });
+      break;
+    }
+    case "ghost": {
+      btn.style.backgroundColor = "transparent";
+      btn.style.border = "0 solid transparent";
+      btn.style.outline = `0 solid transparent`;
+      btn.style.color = colorScheme();
+      btn.addEventListener("mouseover", function () {
+        this.style.backgroundColor = colorChanger(0.8, colorScheme());
+      });
+      btn.addEventListener("mouseleave", function () {
+        this.style.backgroundColor = "transparent";
+      });
+      btn.addEventListener("mousedown", function () {
+        this.style.backgroundColor = colorChanger(0.7, colorScheme());
+      });
+      btn.addEventListener("mouseup", function () {
+        this.style.backgroundColor = colorChanger(0.8, colorScheme());
+      });
+      break;
+    }
+  }
+  btn.style.fontSize = size() + "px";
+  btn.style.fontWeight = 600;
+  btn.style.transition = `0.15s ${easing}`;
+  btn.style.cursor = "pointer";
+  btn.style.padding = `${size() / 2}px ${size() / 1.5}px`;
+  btn.style.borderRadius = size() / 2.5 + "px";
+  btn.style.userSelect = "none";
+  btn.addEventListener("click", function () {
+    this.style.boxShadow = `0 0 0 3px ${colorChanger(0.5, colorScheme())}`;
+  });
+  btn.addEventListener("blur", function () {
+    this.style.boxShadow = `0 0 0 0 transparent`;
+  });
 });
