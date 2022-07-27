@@ -120,7 +120,34 @@
             </flexBox>
           </flexBox>
         </box>
+        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+          <bottomSheet>
+            <button bottomSheetOpenButton type="info">Open bottom sheet</button>
+            <bottomSheetPanel>
+              <menu>
+                <menuStack title="Info">
+                  <menuButton>
+                    <ion-icon name="heart"></ion-icon>Like this post
+                  </menuButton>
+                  <menuButton>
+                    <ion-icon name="chatbubble"></ion-icon>Chat with this guy
+                  </menuButton>
+                </menuStack>
+                <menuStack title="Share">
+                  <menuButton>
+                    <ion-icon name="arrow-redo"></ion-icon>Send to...
+                  </menuButton>
+                  <menuButton>
+                    <ion-icon name="search"></ion-icon>Find the same post
+                  </menuButton>
+                </manuStack>
+              </menu>
+            </bottomSheetPanel>
+          </bottomSheet>
+        </box>
       </flexBox>
     </box>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
 </html>

@@ -483,7 +483,7 @@ document.querySelectorAll("button").forEach((btn) => {
       btn.style.backgroundColor = "transparent";
       btn.style.border = "0 solid transparent";
       btn.style.outline = `1px solid ${colorScheme()}`;
-      btn.style.outlineOffset = -1;
+      btn.style.outlineOffset = "-1px";
       btn.style.color = colorScheme();
       btn.addEventListener("mouseover", function () {
         this.style.backgroundColor = colorChanger(0.75, colorScheme());
@@ -526,10 +526,13 @@ document.querySelectorAll("button").forEach((btn) => {
   btn.style.padding = `${size() / 2}px ${size() / 1.5}px`;
   btn.style.borderRadius = size() / 2.5 + "px";
   btn.style.userSelect = "none";
-  btn.addEventListener("click", function () {
-    this.style.boxShadow = `0 0 0 3px ${colorChanger(0.5, colorScheme())}`;
-  });
-  btn.addEventListener("blur", function () {
-    this.style.boxShadow = `0 0 0 0 transparent`;
+});
+// menu
+document.querySelectorAll("menu").forEach((menu) => {
+  menu.querySelectorAll("menuStack").forEach((stack) => {
+    stack.innerHTML = `
+    <p>${stack.getAttribute("title")}</p>
+    ${stack.innerHTML}
+    `;
   });
 });
