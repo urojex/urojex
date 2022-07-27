@@ -81,6 +81,24 @@ document.querySelectorAll("box").forEach((box) => {
       return componentRounded;
     }
   }
+  function width() {
+    var componentWidth = box.getAttribute("width");
+    if (componentWidth == null) {
+      return "fit-content";
+    } else {
+      return componentWidth;
+    }
+  }
+  function height() {
+    var componentHeight = box.getAttribute("height");
+    if (componentHeight == null) {
+      return "fit-content";
+    } else {
+      return componentHeight;
+    }
+  }
+  box.style.width = width();
+  box.style.height = height();
   box.style.display = "block";
   box.style.padding = padding() + "px";
   box.style.margin = margin() + "px";
@@ -105,7 +123,43 @@ document.querySelectorAll("flexBox").forEach((flexbox) => {
       return componentGap;
     }
   }
+  function width() {
+    var componentWidth = flexbox.getAttribute("width");
+    if (componentWidth == null) {
+      return "fit-content";
+    } else {
+      return componentWidth;
+    }
+  }
+  function height() {
+    var componentHeight = flexbox.getAttribute("height");
+    if (componentHeight == null) {
+      return "fit-content";
+    } else {
+      return componentHeight;
+    }
+  }
+  function alignItems() {
+    var componentItems = flexbox.getAttribute("alignItems");
+    if (componentItems == null) {
+      return "flex-start";
+    } else {
+      return componentItems;
+    }
+  }
+  function justifyContent() {
+    var componentJustify = flexbox.getAttribute("justifyContent");
+    if (componentJustify == null) {
+      return "flex-start";
+    } else {
+      return componentJustify;
+    }
+  }
   flexbox.style.display = "flex";
+  flexbox.style.width = width();
+  flexbox.style.height = height();
+  flexbox.style.alignItems = alignItems();
+  flexbox.style.justifyContent = justifyContent();
   flexbox.style.flexDirection = dir();
   flexbox.style.gap = gap() + "px";
 });
@@ -207,15 +261,19 @@ document.querySelectorAll("alert").forEach((alert) => {
       switch (status) {
         case "success": {
           return "#38a169";
+          break;
         }
         case "error": {
           return "#e53e3e";
+          break;
         }
         case "warning": {
           return "#dd6b20";
+          break;
         }
         case "info": {
           return "#3182ce";
+          break;
         }
       }
     } else {
@@ -231,9 +289,40 @@ document.querySelectorAll("alert").forEach((alert) => {
           <div style="height: ${size() / 2}px; width: ${size() / 1.2}px; background-color: transparent; transform: translateY(-15%) rotate(-45deg); border: 2px solid #fff; border-top: none; border-right: none;"></div>
         </div>`
       });
+      break;
+    }
+    case "error": {
+      alert.querySelectorAll("alertIcon").forEach((icon) => {
+        // prettier-ignore
+        icon.innerHTML = `
+        <div style="background-color: ${colorScheme()}; width: ${size() * 1.5}px; height: ${size() * 1.5}px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: ${size()}px; color: #fff; user-select: none;">
+          !
+        </div>`
+      });
+      break;
+    }
+    case "warning": {
+      alert.querySelectorAll("alertIcon").forEach((icon) => {
+        // prettier-ignore
+        icon.innerHTML = `
+        <div style="background-color: ${colorScheme()}; width: ${size() * 1.5}px; height: ${size() * 1.5}px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: ${size()}px; color: #fff; user-select: none;">
+          !
+        </div>`
+      });
+      break;
+    }
+    case "info": {
+      alert.querySelectorAll("alertIcon").forEach((icon) => {
+        // prettier-ignore
+        icon.innerHTML = `
+        <div style="background-color: ${colorScheme()}; width: ${size() * 1.5}px; height: ${size() * 1.5}px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: ${size()}px; color: #fff; user-select: none;">
+          i
+        </div>`
+      });
+      break;
     }
   }
-  alert.style.backgroundColor = colorChanger(0.7, colorScheme());
+  alert.style.backgroundColor = colorChanger(0.75, colorScheme());
   alert.style.padding = `${size() / 1.5}px ${size()}px`;
   alert.style.display = "flex";
   alert.style.alignItems = "stretch";
@@ -251,4 +340,75 @@ document.querySelectorAll("alert").forEach((alert) => {
       disp.style.fontSize = size() / 1.1 + "px";
     });
   });
+});
+// badge
+document.querySelectorAll("badge").forEach((badge) => {
+  function colorScheme() {
+    var componentColor = badge.getAttribute("colorScheme");
+    var type = badge.getAttribute("type");
+    if (componentColor == null) {
+      switch (type) {
+        case "success": {
+          return "#38a169";
+          break;
+        }
+        case "error": {
+          return "#e53e3e";
+          break;
+        }
+        case "warning": {
+          return "#dd6b20";
+          break;
+        }
+        case "info": {
+          return "#3182ce";
+          break;
+        }
+        default: {
+          return "#718096";
+        }
+      }
+    } else {
+      return componentColor;
+    }
+  }
+  function variant() {
+    var componentVariant = badge.getAttribute("variant");
+    if (componentVariant == null) {
+      return "subtle";
+    } else {
+      return componentVariant;
+    }
+  }
+  function size() {
+    var componentSize = badge.getAttribute("size");
+    if (componentSize == null) {
+      return 14;
+    } else {
+      return componentSize;
+    }
+  }
+  switch (variant()) {
+    case "subtle": {
+      badge.style.backgroundColor = colorChanger(0.7, colorScheme());
+      badge.style.color = colorChanger(-0.4, colorScheme());
+      break;
+    }
+    case "outline": {
+      badge.style.backgroundColor = "transparent";
+      badge.style.color = colorScheme();
+      badge.style.outline = `1px solid ${colorScheme()}`;
+      badge.style.outlineOffset = "-1px";
+      break;
+    }
+    case "solid": {
+      badge.style.backgroundColor = colorScheme();
+      badge.style.color = "#fff";
+    }
+  }
+  badge.style.display = "inline-block";
+  badge.style.padding = `${size() / 8}px ${size() / 4}px`;
+  badge.style.borderRadius = size() / 4 + "px";
+  badge.style.fontSize = size() + "px";
+  badge.style.fontWeight = 600;
 });

@@ -5,67 +5,96 @@
     <script src="../src/nerd.js" defer></script>
   </head>
   <body>
-    <box padding="16" margin="16" border="1px solid #ddd" rounded="10">
-      <accordion size="16" colorScheme="#000">
-        <accordionItem>
-          <accordionButton>Section 1 title<accordionIcon></accordionIcon></accordionButton>
-          <accordionPanel>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-            expedita ad hic totam dolores tempora incidunt ut tenetur sint,
-            asperiores aspernatur error fugiat vel voluptatem laudantium rem et
-            eum voluptatibus.
-          </accordionPanel>
-        </accordionItem>
-        <accordionItem>
-          <accordionButton>Section 2 title<accordionIcon></accordionIcon></accordionButton>
-          <accordionPanel>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-            expedita ad hic totam dolores tempora incidunt ut tenetur sint,
-            asperiores aspernatur error fugiat vel voluptatem laudantium rem et
-            eum voluptatibus.
-          </accordionPanel>
-        </accordionItem>
-        <accordionItem>
-          <accordionButton>Section 3 title<accordionIcon></accordionIcon></accordionButton>
-          <accordionPanel>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-            expedita ad hic totam dolores tempora incidunt ut tenetur sint,
-            asperiores aspernatur error fugiat vel voluptatem laudantium rem et
-            eum voluptatibus.
-          </accordionPanel>
-        </accordionItem>
-      </accordionIcon>
-    </box>
-    <box padding="16" margin="16" border="1px solid #ddd" rounded="10">
-      <flexBox direction="column" gap="8">
-        <alert status="success">
-          <alertIcon></alertIcon>
-          <alertContent>
-            <alertTitle>Everything is now OK!</alertTitle>
-            <alertDiscription>Data uploaded to server. Fire on!</alertDiscription>
-          </alertContent>
-        </alert>
-        <alert status="error">
-          <alertIcon></alertIcon>
-          <alertContent>
-            <alertTitle>Error :(</alertTitle>
-            <alertDiscription>There is an error proccessing your request</alertDiscription>
-          </alertContent>
-        </alert>
-        <alert status="warning">
-          <alertIcon></alertIcon>
-          <alertContent>
-            <alertTitle>Your browser is outdated!</alertTitle>
-            <alertDiscription>Your Nerd experiences may be limited, upgrade now.</alertDiscription>
-          </alertContent>
-        </alert>
-        <alert status="info">
-          <alertIcon></alertIcon>
-          <alertContent>
-            <alertTitle>Chatting time!!!</alertTitle>
-            <alertDiscription>Your friend Jack is online, chat now!</alertDiscription>
-          </alertContent>
-        </alert>
+    <box padding="16">
+      <flexBox gap="16" direction="column">
+        <box padding="16" border="1px solid #ddd" rounded="10">
+          <accordion size="16" colorScheme="#000">
+            <accordionItem>
+              <accordionButton>Section 1 title<accordionIcon></accordionIcon></accordionButton>
+              <accordionPanel>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
+                expedita ad hic totam dolores tempora incidunt ut tenetur sint,
+                asperiores aspernatur error fugiat vel voluptatem laudantium rem et
+                eum voluptatibus.
+              </accordionPanel>
+            </accordionItem>
+            <accordionItem>
+              <accordionButton>Section 2 title<accordionIcon></accordionIcon></accordionButton>
+              <accordionPanel>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
+                expedita ad hic totam dolores tempora incidunt ut tenetur sint,
+                asperiores aspernatur error fugiat vel voluptatem laudantium rem et
+                eum voluptatibus.
+              </accordionPanel>
+            </accordionItem>
+            <accordionItem>
+              <accordionButton>Section 3 title<accordionIcon></accordionIcon></accordionButton>
+              <accordionPanel>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
+                expedita ad hic totam dolores tempora incidunt ut tenetur sint,
+                asperiores aspernatur error fugiat vel voluptatem laudantium rem et
+                eum voluptatibus.
+              </accordionPanel>
+            </accordionItem>
+          </accordionIcon>
+        </box>
+        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+          <flexBox direction="column" gap="16">
+            <alert status="success">
+              <alertIcon></alertIcon>
+              <alertContent>
+                <alertTitle>Everything is now OK!</alertTitle>
+                <alertDiscription>Data uploaded to server. Fire on!</alertDiscription>
+              </alertContent>
+            </alert>
+            <alert status="error">
+              <alertIcon></alertIcon>
+              <alertContent>
+                <alertTitle>Error :(</alertTitle>
+                <alertDiscription>There is an error proccessing your request</alertDiscription>
+              </alertContent>
+            </alert>
+            <alert status="warning">
+              <alertIcon></alertIcon>
+              <alertContent>
+                <alertTitle>Your browser is outdated!</alertTitle>
+                <alertDiscription>Your Nerd experiences may be limited, upgrade now.</alertDiscription>
+              </alertContent>
+            </alert>
+            <alert status="info">
+              <alertIcon></alertIcon>
+              <alertContent>
+                <alertTitle>Chatting time!!!</alertTitle>
+                <alertDiscription>Your friend Jack is online, chat now!</alertDiscription>
+              </alertContent>
+            </alert>
+          </flexBox>
+        </box>
+        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+          <flexBox gap="8" direction="column">
+            <flexBox gap="16">
+              <badge>Default</badge>
+              <badge type="success">Success</badge>
+              <badge type="error">Error</badge>
+              <badge type="warning">Warning</badge>
+              <badge type="info">Info</badge>
+            </flexBox>
+            <flexBox gap="16">
+              <badge variant="outline">Default</badge>
+              <badge variant="outline" type="success">Success</badge>
+              <badge variant="outline" type="error">Error</badge>
+              <badge variant="outline" type="warning">Warning</badge>
+              <badge variant="outline" type="info">Info</badge>
+            </flexBox>
+            <flexBox gap="16">
+              <badge variant="solid">Default</badge>
+              <badge variant="solid" type="success">Success</badge>
+              <badge variant="solid" type="error">Error</badge>
+              <badge variant="solid" type="warning">Warning</badge>
+              <badge variant="solid" type="info">Info</badge>
+            </flexBox>
+          </flexBox>
+        </box>
       </flexBox>
     </box>
   </body>
