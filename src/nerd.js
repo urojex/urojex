@@ -75,7 +75,7 @@ document.querySelectorAll("box").forEach((box) => {
   }
   function rounded() {
     var componentRounded = box.getAttribute("rounded");
-    if (rounded == null) {
+    if (componentRounded == null) {
       return 0;
     } else {
       return componentRounded;
@@ -86,6 +86,28 @@ document.querySelectorAll("box").forEach((box) => {
   box.style.margin = margin() + "px";
   box.style.border = border();
   box.style.borderRadius = rounded() + "px";
+});
+// flexBox
+document.querySelectorAll("flexBox").forEach((flexbox) => {
+  function dir() {
+    var componentDir = flexbox.getAttribute("direction");
+    if (componentDir == null) {
+      return "row";
+    } else {
+      return componentDir;
+    }
+  }
+  function gap() {
+    var componentGap = flexbox.getAttribute("gap");
+    if (componentGap == null) {
+      return 0;
+    } else {
+      return componentGap;
+    }
+  }
+  flexbox.style.display = "flex";
+  flexbox.style.flexDirection = dir();
+  flexbox.style.gap = gap() + "px";
 });
 // Accordion
 document.querySelectorAll("accordion").forEach((accordion) => {
@@ -165,5 +187,68 @@ document.querySelectorAll("accordion").forEach((accordion) => {
     icon.innerHTML = `
     <div style="height: 100%; width: 100%; background-color: transparent; border: 2px solid ${colorScheme()}; border-top: none; border-left: none;"></div>
     `;
+  });
+});
+// alert
+document.querySelectorAll("alert").forEach((alert) => {
+  var status = alert.getAttribute("status");
+  function size() {
+    var componentSize = alert.getAttribute("size");
+    if (componentSize == null) {
+      return 16;
+    } else {
+      return componentSize;
+    }
+  }
+  function colorScheme() {
+    var componentColor = alert.getAttribute("colorScheme");
+    var status = alert.getAttribute("status");
+    if (componentColor == null) {
+      switch (status) {
+        case "success": {
+          return "#38a169";
+        }
+        case "error": {
+          return "#e53e3e";
+        }
+        case "warning": {
+          return "#dd6b20";
+        }
+        case "info": {
+          return "#3182ce";
+        }
+      }
+    } else {
+      return componentColor;
+    }
+  }
+  switch (status) {
+    case "success": {
+      alert.querySelectorAll("alertIcon").forEach((icon) => {
+        // prettier-ignore
+        icon.innerHTML = `
+        <div style="background-color: ${colorScheme()}; width: ${size() * 1.5}px; height: ${size() * 1.5}px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <div style="height: ${size() / 2}px; width: ${size() / 1.2}px; background-color: transparent; transform: translateY(-15%) rotate(-45deg); border: 2px solid #fff; border-top: none; border-right: none;"></div>
+        </div>`
+      });
+    }
+  }
+  alert.style.backgroundColor = colorChanger(0.7, colorScheme());
+  alert.style.padding = `${size() / 1.5}px ${size()}px`;
+  alert.style.display = "flex";
+  alert.style.alignItems = "stretch";
+  alert.style.gap = size() + "px";
+  alert.style.borderRadius = size() / 2.5 + "px";
+  alert.querySelectorAll("alertContent").forEach((content) => {
+    content.style.display = "flex";
+    content.style.flexDirection = "column";
+    content.style.gap = size() / 2.5 + "px";
+    content.querySelectorAll("alertTitle").forEach((title) => {
+      title.style.fontSize = size() + "px";
+      title.style.fontWeight = 600;
+    });
+    content.querySelectorAll("alertDiscription").forEach((disp) => {
+      disp.style.fontSize = size() / 1.1 + "px";
+    });
   });
 });
