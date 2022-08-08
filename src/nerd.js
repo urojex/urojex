@@ -529,10 +529,98 @@ document.querySelectorAll("button").forEach((btn) => {
 });
 // menu
 document.querySelectorAll("menu").forEach((menu) => {
+  function size() {
+    var componentSize = menu.getAttribute("size");
+    if (componentSize == null) {
+      return 16;
+    } else {
+      return componentSize;
+    }
+  }
+  function color() {
+    var componentColor = menu.getAttribute("color");
+    if (componentColor == null) {
+      return "#000";
+    } else {
+      return componentColor;
+    }
+  }
   menu.querySelectorAll("menuStack").forEach((stack) => {
-    stack.innerHTML = `
-    <p>${stack.getAttribute("title")}</p>
-    ${stack.innerHTML}
-    `;
+    if (stack.getAttribute("title" == null)) {
+      console.error("Please type the title name for the stack.");
+    } else {
+      // prettier-ignore
+      stack.innerHTML = `
+      <p style="color: ${colorChanger(0.3, color())}; font-weight: 600; text-transform: uppercase; font-size: ${size() / 1.15}px; margin-bottom: ${size() / 2}px">${stack.getAttribute("title")}</p>
+      ${stack.innerHTML}
+      `;
+    }
+    stack.style.display = "block";
+    stack.style.margin = `${size()}px 0`;
+    stack.querySelectorAll("menuButton").forEach((btn) => {
+      btn.style.fontSize = size() + "px";
+      btn.style.padding = `${size() / 2.5}px 0`;
+      btn.style.backgroundColor = "transparent";
+      btn.style.cursor = "pointer";
+      btn.style.display = "flex";
+      btn.style.alignItems = "center";
+      btn.style.gap = size() / 2 + "px";
+      btn.style.width = "100%";
+      btn.addEventListener("mouseover", function () {
+        this.style.backgroundColor = colorChanger(0.92, color());
+      });
+      btn.addEventListener("mouseleave", function () {
+        this.style.backgroundColor = "transparent";
+      });
+      btn.addEventListener("mousedown", function () {
+        this.style.backgroundColor = colorChanger(0.87, color());
+      });
+      btn.addEventListener("mouseup", function () {
+        this.style.backgroundColor = colorChanger(0.92, color());
+      });
+      btn.querySelectorAll("menuIcon").forEach((icon) => {
+        icon.style.fontSize = size() * 2 + "px";
+        icon.style.display = "flex";
+        icon.style.alignItems = "center";
+        icon.style.justifyContent = "center";
+        icon.style.color = color();
+      });
+    });
+  });
+});
+// bottom sheet
+document.querySelectorAll("bottomSheet").forEach((bottom) => {
+  const openBtn = bottom.querySelector("[bottomSheetOpenButton]");
+  const sheet = bottom.querySelector("bottomSheetPanel");
+  const overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.right = 0;
+  overlay.style.height = "100vh";
+  overlay.style.width = "100vw";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  // overlay.style.zIndex = -1;
+  sheet.style.opacity = 0;
+  sheet.style.position = "fixed";
+  sheet.style.bottom = 0;
+  sheet.style.left = 0;
+  sheet.style.right = 0;
+  sheet.style.transform = "translateY(100%)";
+  sheet.style.backgroundColor = "#fff";
+  sheet.style.zIndex = 1;
+  sheet.style.borderRadius = `8px 8px 0 0`;
+  sheet.style.transition = `.2s ${easing}`;
+  openBtn.addEventListener("click", function () {
+    this.classList.add("opened");
+    const sheet = this.nextElementSibling;
+    sheet.style.opacity = 1;
+    sheet.style.transform = "translateY(0)";
+    document.body.appendChild(overlay);
+  });
+  overlay.addEventListener("click", function () {
+    this.remove();
+    sheet.style.opacity = 0;
+    sheet.style.transform = "translateY(100%)";
   });
 });

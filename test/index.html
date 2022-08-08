@@ -124,24 +124,34 @@
           <bottomSheet>
             <button bottomSheetOpenButton type="info">Open bottom sheet</button>
             <bottomSheetPanel>
-              <menu>
-                <menuStack title="Info">
-                  <menuButton>
-                    <ion-icon name="heart"></ion-icon>Like this post
-                  </menuButton>
-                  <menuButton>
-                    <ion-icon name="chatbubble"></ion-icon>Chat with this guy
-                  </menuButton>
-                </menuStack>
-                <menuStack title="Share">
-                  <menuButton>
-                    <ion-icon name="arrow-redo"></ion-icon>Send to...
-                  </menuButton>
-                  <menuButton>
-                    <ion-icon name="search"></ion-icon>Find the same post
-                  </menuButton>
-                </manuStack>
-              </menu>
+              <box padding="16" width="100%">
+                <menu>
+                  <menuStack title="Info">
+                    <menuButton>
+                      <menuIcon>
+                        <ion-icon name="heart"></ion-icon>
+                      </menuIcon>Like this post
+                    </menuButton>
+                    <menuButton>
+                      <menuIcon>
+                        <ion-icon name="chatbubble"></ion-icon>
+                      </menuIcon>Chat with this guy
+                    </menuButton>
+                  </menuStack>
+                  <menuStack title="Share">
+                    <menuButton>
+                      <menuIcon>
+                        <ion-icon name="arrow-redo"></ion-icon>
+                      </menuIcon>Send to...
+                    </menuButton>
+                    <menuButton>
+                      <menuIcon>
+                        <ion-icon name="search"></ion-icon>
+                      </menuIcon>Find the same post
+                    </menuButton>
+                  </manuStack>
+                </menu>
+              </box>
             </bottomSheetPanel>
           </bottomSheet>
         </box>
