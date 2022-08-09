@@ -5,9 +5,9 @@
     <script src="../src/nerd.js" defer></script>
   </head>
   <body>
-    <box padding="16">
-      <flexBox gap="16" direction="column">
-        <box padding="16" border="1px solid #ddd" rounded="10">
+    <box padding="16" maxwidth="900px" margin="16px auto  ">
+      <flexBox gap="16" direction="column" width="100%">
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <accordion size="16" colorScheme="#000">
             <accordionItem>
               <accordionButton>Section 1 title<accordionIcon></accordionIcon></accordionButton>
@@ -38,7 +38,7 @@
             </accordionItem>
           </accordionIcon>
         </box>
-        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <flexBox direction="column" gap="16" width="100%">
             <alert status="success">
               <alertIcon></alertIcon>
@@ -70,7 +70,7 @@
             </alert>
           </flexBox>
         </box>
-        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <flexBox gap="8" direction="column">
             <flexBox gap="16">
               <badge>Default</badge>
@@ -95,7 +95,7 @@
             </flexBox>
           </flexBox>
         </box>
-        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <flexBox gap="8" direction="column">
             <flexBox gap="16">
               <button>Default</button>
@@ -120,11 +120,11 @@
             </flexBox>
           </flexBox>
         </box>
-        <box padding="16" border="1px solid #ddd" rounded="10" width="100%">
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <bottomSheet>
             <button bottomSheetOpenButton type="info">Open bottom sheet</button>
             <bottomSheetPanel>
-              <box padding="16" width="100%">
+              <box padding="16px" width="100%">
                 <menu>
                   <menuStack title="Info">
                     <menuButton>
@@ -154,6 +154,22 @@
               </box>
             </bottomSheetPanel>
           </bottomSheet>
+        </box>
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
+          <text
+            display="block"
+            margin="0 0 16px 0"
+            align="center"
+            size="32"
+            weight="500"
+            highlightQuery="program"
+            highlightBg="transparent"
+            highlightFg="#f00">"How did they program a programming language to program a program?"</text>
+          <divider color="#ddd"></divider>
+          <text weight="400" margin="16px" display="block">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia aliquid ducimus ullam fuga atque ex sapiente odit dignissimos,
+            dolorum nobis eius perspiciatis, necessitatibus blanditiis, cupiditate laudantium doloremque quo quidem repudiandae?
+          </text>  
         </box>
       </flexBox>
     </box>

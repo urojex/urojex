@@ -89,6 +89,14 @@ document.querySelectorAll("box").forEach((box) => {
       return componentWidth;
     }
   }
+  function maxWidth() {
+    var componentmxWidth = box.getAttribute("maxWidth");
+    if (componentmxWidth == null) {
+      return "100%";
+    } else {
+      return componentmxWidth;
+    }
+  }
   function height() {
     var componentHeight = box.getAttribute("height");
     if (componentHeight == null) {
@@ -97,13 +105,32 @@ document.querySelectorAll("box").forEach((box) => {
       return componentHeight;
     }
   }
+  function maxHeight() {
+    var componentmxHeight = box.getAttribute("maxHheight");
+    if (componentmxHeight == null) {
+      return "fit-content";
+    } else {
+      return componentmxHeight;
+    }
+  }
+  function backgroundColor() {
+    var componentBg = box.getAttribute("background");
+    if (componentBg == null) {
+      return "transparent";
+    } else {
+      return componentBg;
+    }
+  }
+  box.style.backgroundColor = backgroundColor();
   box.style.width = width();
   box.style.height = height();
+  box.style.maxWidth = maxWidth();
+  box.style.maxHeight = maxHeight();
   box.style.display = "block";
-  box.style.padding = padding() + "px";
-  box.style.margin = margin() + "px";
+  box.style.padding = padding();
+  box.style.margin = margin();
   box.style.border = border();
-  box.style.borderRadius = rounded() + "px";
+  box.style.borderRadius = rounded();
 });
 // flexBox
 document.querySelectorAll("flexBox").forEach((flexbox) => {
@@ -480,16 +507,16 @@ document.querySelectorAll("button").forEach((btn) => {
       break;
     }
     case "outline": {
-      btn.style.backgroundColor = "transparent";
+      btn.style.backgroundColor = colorChanger(0.9, colorScheme());
       btn.style.border = "0 solid transparent";
-      btn.style.outline = `1px solid ${colorScheme()}`;
+      btn.style.outline = `1px solid ${colorChanger(0.25, colorScheme())}`;
       btn.style.outlineOffset = "-1px";
       btn.style.color = colorScheme();
       btn.addEventListener("mouseover", function () {
         this.style.backgroundColor = colorChanger(0.75, colorScheme());
       });
       btn.addEventListener("mouseleave", function () {
-        this.style.backgroundColor = "transparent";
+        this.style.backgroundColor = colorChanger(0.9, colorScheme());
       });
       btn.addEventListener("mousedown", function () {
         this.style.backgroundColor = colorChanger(0.65, colorScheme());
@@ -520,11 +547,11 @@ document.querySelectorAll("button").forEach((btn) => {
     }
   }
   btn.style.fontSize = size() + "px";
-  btn.style.fontWeight = 600;
+  btn.style.fontWeight = 400;
   btn.style.transition = `0.15s ${easing}`;
   btn.style.cursor = "pointer";
-  btn.style.padding = `${size() / 2}px ${size() / 1.5}px`;
-  btn.style.borderRadius = size() / 2.5 + "px";
+  btn.style.padding = `${size() / 3.5}px ${size() / 1.5}px`;
+  btn.style.borderRadius = size() / 3 + "px";
   btn.style.userSelect = "none";
 });
 // menu
@@ -623,4 +650,95 @@ document.querySelectorAll("bottomSheet").forEach((bottom) => {
     sheet.style.opacity = 0;
     sheet.style.transform = "translateY(100%)";
   });
+});
+// text
+document.querySelectorAll("text").forEach((text) => {
+  function size() {
+    var componentSize = text.getAttribute("size");
+    if (componentSize == null) {
+      return 16;
+    } else {
+      return componentSize;
+    }
+  }
+  function weight() {
+    var componentWeight = text.getAttribute("weight");
+    if (componentWeight == null) {
+      return 16;
+    } else {
+      return componentWeight;
+    }
+  }
+  function color() {
+    var componentColor = text.getAttribute("color");
+    if (componentColor == null) {
+      return "#000";
+    } else {
+      return componentColor;
+    }
+  }
+  function align() {
+    var componentAlign = text.getAttribute("align");
+    if (componentAlign == null) {
+      return "left";
+    } else {
+      return componentAlign;
+    }
+  }
+  function display() {
+    var componentDisplay = text.getAttribute("display");
+    if (componentDisplay == null) {
+      return "inline";
+    } else {
+      return componentDisplay;
+    }
+  }
+  function padding() {
+    var componentPadding = text.getAttribute("padding");
+    if (componentPadding == null) {
+      return 0;
+    } else {
+      return componentPadding;
+    }
+  }
+  function margin() {
+    var componentMargin = text.getAttribute("margin");
+    if (componentMargin == null) {
+      return 0;
+    } else {
+      return componentMargin;
+    }
+  }
+  text.style.padding = padding();
+  text.style.margin = margin();
+  text.style.fontSize = size() + "px";
+  text.style.fontWeight = weight();
+  text.style.color = color();
+  text.style.textAlign = align();
+  text.style.display = display();
+  var highlightQuery = text.getAttribute("highlightQuery");
+  if (highlightQuery == null) {
+    return;
+  } else {
+    // prettier-ignore
+    text.innerHTML = text.innerText.replaceAll(
+      highlightQuery,
+      `<span style="background-color: ${text.getAttribute("highlightBg")}; color: ${text.getAttribute("highlightFg")}">${highlightQuery}</span>`
+    );
+  }
+});
+// divider
+document.querySelectorAll("divider").forEach((divider) => {
+  function background() {
+    var componentBg = divider.getAttribute("color");
+    if (componentBg == null) {
+      return "#000";
+    } else {
+      return componentBg;
+    }
+  }
+  divider.style.display = "block";
+  divider.style.height = "1px";
+  divider.style.width = "100%";
+  divider.style.backgroundColor = background();
 });
