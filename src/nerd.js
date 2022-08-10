@@ -551,7 +551,7 @@ document.querySelectorAll("button").forEach((btn) => {
   btn.style.transition = `0.15s ${easing}`;
   btn.style.cursor = "pointer";
   btn.style.padding = `${size() / 3.5}px ${size() / 1.5}px`;
-  btn.style.borderRadius = size() / 3 + "px";
+  btn.style.borderRadius = size() / 3.5 + "px";
   btn.style.userSelect = "none";
 });
 // menu
@@ -741,4 +741,17 @@ document.querySelectorAll("divider").forEach((divider) => {
   divider.style.height = "1px";
   divider.style.width = "100%";
   divider.style.backgroundColor = background();
+});
+// image
+document.querySelectorAll("photo").forEach((img) => {
+  // prettier-ignore
+  img.innerHTML = `<img src="${img.getAttribute("src")}" height="${img.getAttribute("height")}" width="${img.getAttribute("width")}" style="display: block; transition: .2s ${easing}">`;
+  img.style.overflow = "hidden";
+  img.style.display = "block";
+  img.addEventListener("mouseover", function () {
+    this.querySelector("img").style.transform = "scale(1.1)";
+  });
+  img.addEventListener("mouseleave", function () {
+    this.querySelector("img").style.transform = "scale(1)";
+  });
 });
