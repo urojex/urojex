@@ -21,7 +21,7 @@ document.head.insertAdjacentHTML(
   </style>
 `
 );
-const easing = "ease";
+const easing = "cubic-bezier(0, 0.55, 0.45, 1)";
 // prettier-ignore
 const colorChanger=(p,c0,c1,l)=>{
   let r,g,b,P,f,t,h,i=parseInt,m=Math.round,a=typeof(c1)=="string";
@@ -208,13 +208,14 @@ document.querySelectorAll("accordion").forEach((accordion) => {
       return componentColor;
     }
   }
+  accordion.style.display = "flex";
+  accordion.style.flexDirection = "column";
+  accordion.style.gap = "4px";
   accordion.querySelectorAll("accordionItem").forEach((item) => {
     item.style.display = "block";
-    item.style.borderTop = `1px solid ${colorChanger(0.75, colorScheme())}`;
-  });
-  accordion.querySelectorAll("accordionItem:last-child").forEach((item) => {
-    item.style.display = "block";
-    item.style.borderBottom = `1px solid ${colorChanger(0.75, colorScheme())}`;
+    item.style.backgroundColor = "#fff";
+    item.style.borderRadius = "4px";
+    item.style.border = `1px solid ${colorChanger(0.8, colorScheme())}`;
   });
   accordion.querySelectorAll("accordionButton").forEach((btn) => {
     btn.style.display = "flex";
@@ -225,25 +226,22 @@ document.querySelectorAll("accordion").forEach((accordion) => {
     btn.style.userSelect = "none";
     btn.style.padding = `${size() / 2}px ${size()}px`;
     btn.style.color = colorScheme();
-    btn.style.transition = `0.08s ${easing}`;
-    btn.style.backgroundColor = "#fff";
+    btn.style.backgroundColor = colorChanger(0.9, colorScheme());
     btn.style.fontWeight = "400";
     btn.addEventListener("mouseover", function () {
-      this.style.backgroundColor = colorChanger(0.89, colorScheme());
+      this.style.backgroundColor = colorChanger(0.8, colorScheme());
     });
     btn.addEventListener("mouseleave", function () {
-      this.style.backgroundColor = "#fff";
+      this.style.backgroundColor = colorChanger(0.9, colorScheme());
     });
     btn.addEventListener("click", function () {
       this.classList.toggle("active");
       var panel = this.nextElementSibling;
       if (panel.style.height == panel.scrollHeight + "px") {
         panel.style.height = 0;
-        panel.style.opacity = 0;
         this.querySelector("accordionIcon").style.transform = "rotate(45deg)";
       } else {
         panel.style.height = panel.scrollHeight + "px";
-        panel.style.opacity = 1;
         this.querySelector("accordionIcon").style.transform = "rotate(225deg)";
       }
     });
@@ -266,7 +264,7 @@ document.querySelectorAll("accordion").forEach((accordion) => {
     icon.style.transform = "rotate(45deg)";
     // prettier-ignore
     icon.innerHTML = `
-    <div style="height: 100%; width: 100%; background-color: transparent; border: 2px solid ${colorScheme()}; border-top: none; border-left: none;"></div>
+    <div style="height: 100%; width: 100%; background-color: transparent; border: 2px solid ${colorChanger(0.3, colorScheme())}; border-top: none; border-left: none;"></div>
     `;
   });
 });
@@ -411,21 +409,21 @@ document.querySelectorAll("badge").forEach((badge) => {
   function size() {
     var componentSize = badge.getAttribute("size");
     if (componentSize == null) {
-      return 14;
+      return 13;
     } else {
       return componentSize;
     }
   }
   switch (variant()) {
     case "subtle": {
-      badge.style.backgroundColor = colorChanger(0.7, colorScheme());
+      badge.style.backgroundColor = colorChanger(0.8, colorScheme());
       badge.style.color = colorChanger(-0.4, colorScheme());
       break;
     }
     case "outline": {
       badge.style.backgroundColor = "transparent";
       badge.style.color = colorScheme();
-      badge.style.outline = `1px solid ${colorScheme()}`;
+      badge.style.outline = `1px solid ${colorChanger(0.5, colorScheme())}`;
       badge.style.outlineOffset = "-1px";
       break;
     }
@@ -435,8 +433,8 @@ document.querySelectorAll("badge").forEach((badge) => {
     }
   }
   badge.style.display = "inline-block";
-  badge.style.padding = `${size() / 8}px ${size() / 4}px`;
-  badge.style.borderRadius = size() / 4 + "px";
+  badge.style.padding = `${size() / 5}px ${size() / 1.5}px`;
+  badge.style.borderRadius = size() / 2.5 + "px";
   badge.style.fontSize = size() + "px";
   badge.style.fontWeight = 600;
 });
@@ -464,7 +462,7 @@ document.querySelectorAll("button").forEach((btn) => {
           break;
         }
         default: {
-          return "#718096";
+          return "#007AFF";
         }
       }
     } else {
@@ -474,7 +472,7 @@ document.querySelectorAll("button").forEach((btn) => {
   function variant() {
     var componentVariant = btn.getAttribute("variant");
     if (componentVariant == null) {
-      return "solid";
+      return "primary";
     } else {
       return componentVariant;
     }
@@ -482,77 +480,62 @@ document.querySelectorAll("button").forEach((btn) => {
   function size() {
     var componentSize = btn.getAttribute("size");
     if (componentSize == null) {
-      return 16;
+      return 15;
     } else {
       return componentSize;
     }
   }
   switch (variant()) {
-    case "solid": {
+    case "primary": {
       btn.style.backgroundColor = colorScheme();
       btn.style.border = "0 solid transparent";
       btn.style.color = "#fff";
       btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(-0.3, colorScheme());
+        this.style.backgroundColor = colorChanger(-0.2, colorScheme());
       });
       btn.addEventListener("mouseleave", function () {
         this.style.backgroundColor = colorScheme();
       });
       btn.addEventListener("mousedown", function () {
-        this.style.backgroundColor = colorChanger(-0.6, colorScheme());
+        this.style.backgroundColor = colorChanger(-0.4, colorScheme());
       });
       btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(-0.3, colorScheme());
+        this.style.backgroundColor = colorChanger(-0.2, colorScheme());
       });
       break;
     }
-    case "outline": {
-      btn.style.backgroundColor = colorChanger(0.9, colorScheme());
+    case "secondary": {
+      btn.style.backgroundColor = "#fff";
       btn.style.border = "0 solid transparent";
-      btn.style.outline = `1px solid ${colorChanger(0.25, colorScheme())}`;
-      btn.style.outlineOffset = "-1px";
-      btn.style.color = colorScheme();
+      btn.style.outline = "0";
+      btn.style.color = "#000";
+      btn.style.boxShadow = "0 1px 1px 1px rgba(0, 0, 0, 0.1)";
       btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(0.75, colorScheme());
+        this.style.backgroundColor = colorChanger(0.95, "#000");
       });
       btn.addEventListener("mouseleave", function () {
-        this.style.backgroundColor = colorChanger(0.9, colorScheme());
+        this.style.backgroundColor = "#fff";
       });
       btn.addEventListener("mousedown", function () {
-        this.style.backgroundColor = colorChanger(0.65, colorScheme());
+        this.style.backgroundColor = colorChanger(0.9, "#000");
       });
       btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(0.75, colorScheme());
-      });
-      break;
-    }
-    case "ghost": {
-      btn.style.backgroundColor = "transparent";
-      btn.style.border = "0 solid transparent";
-      btn.style.outline = `0 solid transparent`;
-      btn.style.color = colorScheme();
-      btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(0.8, colorScheme());
-      });
-      btn.addEventListener("mouseleave", function () {
-        this.style.backgroundColor = "transparent";
-      });
-      btn.addEventListener("mousedown", function () {
-        this.style.backgroundColor = colorChanger(0.7, colorScheme());
-      });
-      btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(0.8, colorScheme());
+        this.style.backgroundColor = colorChanger(0.95, "#000");
       });
       break;
     }
   }
   btn.style.fontSize = size() + "px";
   btn.style.fontWeight = 400;
-  btn.style.transition = `0.15s ${easing}`;
   btn.style.cursor = "pointer";
-  btn.style.padding = `${size() / 3.5}px ${size() / 1.5}px`;
-  btn.style.borderRadius = size() / 3.5 + "px";
+  btn.style.padding = `${size() / 3}px ${size()}px`;
+  btn.style.borderRadius = size() / 2 + "px";
   btn.style.userSelect = "none";
+  if (btn.hasAttribute("disabled") == true) {
+    btn.style.backgroundColor = "#F4F5F5";
+    btn.style.color = "#B7B8B8";
+    btn.style.pointerEvents = "none";
+  }
 });
 // menu
 document.querySelectorAll("menu").forEach((menu) => {
@@ -578,23 +561,24 @@ document.querySelectorAll("menu").forEach((menu) => {
     } else {
       // prettier-ignore
       stack.innerHTML = `
-      <p style="color: ${colorChanger(0.3, color())}; font-weight: 600; text-transform: uppercase; font-size: ${size() / 1.15}px; margin-bottom: ${size() / 2}px">${stack.getAttribute("title")}</p>
+      <p style="color: rgba(0, 0, 0, 0.26); font-weight: 600; font-size: ${size() / 1.15}px; margin-bottom: ${size() / 4}px; margin-left: ${size() / 1.2}px;">${stack.getAttribute("title")}</p>
       ${stack.innerHTML}
       `;
     }
     stack.style.display = "block";
-    stack.style.margin = `${size()}px 0`;
     stack.querySelectorAll("menuButton").forEach((btn) => {
       btn.style.fontSize = size() + "px";
-      btn.style.padding = `${size() / 2.5}px 0`;
+      btn.style.padding = `${size() / 2}px ${size() / 1.2}px`;
       btn.style.backgroundColor = "transparent";
+      btn.style.borderRadius = size() / 2 + "px";
       btn.style.cursor = "pointer";
       btn.style.display = "flex";
       btn.style.alignItems = "center";
       btn.style.gap = size() / 2 + "px";
       btn.style.width = "100%";
+      btn.style.transition = `.2s ${easing}`;
       btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(0.92, color());
+        this.style.backgroundColor = colorChanger(0.85, color());
       });
       btn.addEventListener("mouseleave", function () {
         this.style.backgroundColor = "transparent";
@@ -603,52 +587,20 @@ document.querySelectorAll("menu").forEach((menu) => {
         this.style.backgroundColor = colorChanger(0.87, color());
       });
       btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(0.92, color());
-      });
-      btn.querySelectorAll("menuIcon").forEach((icon) => {
-        icon.style.fontSize = size() * 2 + "px";
-        icon.style.display = "flex";
-        icon.style.alignItems = "center";
-        icon.style.justifyContent = "center";
-        icon.style.color = color();
+        this.style.backgroundColor = colorChanger(0.85, color());
       });
     });
   });
-});
-// bottom sheet
-document.querySelectorAll("bottomSheet").forEach((bottom) => {
-  const openBtn = bottom.querySelector("[bottomSheetOpenButton]");
-  const sheet = bottom.querySelector("bottomSheetPanel");
-  const overlay = document.createElement("div");
-  overlay.style.position = "fixed";
-  overlay.style.top = 0;
-  overlay.style.left = 0;
-  overlay.style.right = 0;
-  overlay.style.height = "100vh";
-  overlay.style.width = "100vw";
-  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  // overlay.style.zIndex = -1;
-  sheet.style.opacity = 0;
-  sheet.style.position = "fixed";
-  sheet.style.bottom = 0;
-  sheet.style.left = 0;
-  sheet.style.right = 0;
-  sheet.style.transform = "translateY(100%)";
-  sheet.style.backgroundColor = "#fff";
-  sheet.style.zIndex = 1;
-  sheet.style.borderRadius = `8px 8px 0 0`;
-  sheet.style.transition = `.2s ${easing}`;
-  openBtn.addEventListener("click", function () {
-    this.classList.add("opened");
-    const sheet = this.nextElementSibling;
-    sheet.style.opacity = 1;
-    sheet.style.transform = "translateY(0)";
-    document.body.appendChild(overlay);
-  });
-  overlay.addEventListener("click", function () {
-    this.remove();
-    sheet.style.opacity = 0;
-    sheet.style.transform = "translateY(100%)";
+  menu.querySelectorAll("menuStack:not(:last-child)").forEach((stack) => {
+    function size() {
+      var componentSize = stack.parentElement.getAttribute("size");
+      if (componentSize == null) {
+        return 16;
+      } else {
+        return componentSize;
+      }
+    }
+    stack.style.marginBottom = size() + "px";
   });
 });
 // text

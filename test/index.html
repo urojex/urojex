@@ -36,7 +36,7 @@
                 eum voluptatibus.
               </accordionPanel>
             </accordionItem>
-          </accordionIcon>
+          </accordion>
         </box>
         <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <flexBox direction="column" gap="16" width="100%">
@@ -105,55 +105,32 @@
               <button type="info">Info</button>
             </flexBox>
             <flexBox gap="16">
-              <button variant="outline">Default</button>
-              <button variant="outline" type="success">Success</button>
-              <button variant="outline" type="error">Error</button>
-              <button variant="outline" type="warning">Warning</button>
-              <button variant="outline" type="info">Info</button>
+              <button variant="secondary">Default</button>
+              <button variant="secondary" type="success">Success</button>
+              <button variant="secondary" type="error">Error</button>
+              <button variant="secondary" type="warning">Warning</button>
+              <button variant="secondary" type="info">Info</button>
             </flexBox>
             <flexBox gap="16">
-              <button variant="ghost">Default</button>
-              <button variant="ghost" type="success">Success</button>
-              <button variant="ghost" type="error">Error</button>
-              <button variant="ghost" type="warning">Warning</button>
-              <button variant="ghost" type="info">Info</button>
+              <button disabled>Default</button>
+              <button disabled type="success">Success</button>
+              <button disabled type="error">Error</button>
+              <button disabled type="warning">Warning</button>
+              <button disabled type="info">Info</button>
             </flexBox>
           </flexBox>
         </box>
         <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
-          <bottomSheet>
-            <button bottomSheetOpenButton type="info">Open bottom sheet</button>
-            <bottomSheetPanel>
-              <box padding="16px" width="100%">
-                <menu>
-                  <menuStack title="Info">
-                    <menuButton>
-                      <menuIcon>
-                        <ion-icon name="heart"></ion-icon>
-                      </menuIcon>Like this post
-                    </menuButton>
-                    <menuButton>
-                      <menuIcon>
-                        <ion-icon name="chatbubble"></ion-icon>
-                      </menuIcon>Chat with this guy
-                    </menuButton>
-                  </menuStack>
-                  <menuStack title="Share">
-                    <menuButton>
-                      <menuIcon>
-                        <ion-icon name="arrow-redo"></ion-icon>
-                      </menuIcon>Send to...
-                    </menuButton>
-                    <menuButton>
-                      <menuIcon>
-                        <ion-icon name="search"></ion-icon>
-                      </menuIcon>Find the same post
-                    </menuButton>
-                  </manuStack>
-                </menu>
-              </box>
-            </bottomSheetPanel>
-          </bottomSheet>
+          <menu>
+            <menuStack title="Info">
+              <menuButton>Like this post</menuButton>
+              <menuButton>Chat with this guy</menuButton>
+            </menuStack>
+            <menuStack title="Share">
+              <menuButton>Send to...</menuButton>
+              <menuButton>Find the same post</menuButton>
+            </menuStack>
+          </menu>
         </box>
         <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
           <text
