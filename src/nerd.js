@@ -113,7 +113,7 @@ document.querySelectorAll("box").forEach((box) => {
       return componentmxHeight;
     }
   }
-  function backgroundColor() {
+  function background() {
     var componentBg = box.getAttribute("background");
     if (componentBg == null) {
       return "transparent";
@@ -121,7 +121,7 @@ document.querySelectorAll("box").forEach((box) => {
       return componentBg;
     }
   }
-  box.style.backgroundColor = backgroundColor();
+  box.style.background = background();
   box.style.width = width();
   box.style.height = height();
   box.style.maxWidth = maxWidth();
