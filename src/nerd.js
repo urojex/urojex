@@ -528,8 +528,8 @@ document.querySelectorAll("button").forEach((btn) => {
   btn.style.fontSize = size() + "px";
   btn.style.fontWeight = 400;
   btn.style.cursor = "pointer";
-  btn.style.padding = `${size() / 3}px ${size()}px`;
-  btn.style.borderRadius = size() / 2 + "px";
+  btn.style.padding = `${size() / 6}px ${size() / 1.5}px`;
+  btn.style.borderRadius = size() / 2.3 + "px";
   btn.style.userSelect = "none";
   if (btn.hasAttribute("disabled") == true) {
     btn.style.backgroundColor = "#F4F5F5";
@@ -542,7 +542,7 @@ document.querySelectorAll("menu").forEach((menu) => {
   function size() {
     var componentSize = menu.getAttribute("size");
     if (componentSize == null) {
-      return 16;
+      return 14;
     } else {
       return componentSize;
     }
@@ -706,4 +706,41 @@ document.querySelectorAll("photo").forEach((img) => {
   img.addEventListener("mouseleave", function () {
     this.querySelector("img").style.transform = "scale(1)";
   });
+});
+document.querySelectorAll("checkBox").forEach((check) => {
+  function className() {
+    var componentClassName = check.getAttribute("class");
+    if (componentClassName == null) {
+      return "";
+    } else {
+      return componentClassName;
+    }
+  }
+  function id() {
+    var componentid = check.getAttribute("id");
+    if (componentid == null) {
+      return "";
+    } else {
+      return componentid;
+    }
+  }
+  function size() {
+    var componentSize = check.getAttribut("size");
+    if (componentSize == null) {
+      return "16";
+    } else {
+      return componentSize;
+    }
+  }
+  function color() {
+    var componentColor = check.getAttribute("color");
+    if (componentColor == null) {
+      return "#007AFF";
+    } else {
+      return componentColor;
+    }
+  }
+  check.innerHTML = `<label><input type="checkbox" class="${className()}" id="${id()}" /></label>`;
+  check.setAttribute("class", "");
+  check.setAttribute("id", "");
 });
