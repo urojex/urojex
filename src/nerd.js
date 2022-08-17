@@ -1,6 +1,6 @@
 var fontLink =
-  "@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap')";
-var fontName = "Open Sans, sans-serif";
+  "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap')";
+var fontName = "'Inter', sans-serif";
 document.head.insertAdjacentHTML(
   "afterbegin",
   `
@@ -192,10 +192,11 @@ document.querySelectorAll("flexBox").forEach((flexbox) => {
 });
 // Accordion
 document.querySelectorAll("accordion").forEach((accordion) => {
+  accordion.style.backgroundColor = "#F2F2F7";
   function size() {
     var componentSize = accordion.getAttribute("size");
     if (componentSize == null) {
-      return 16;
+      return 14;
     } else {
       return componentSize;
     }
@@ -211,11 +212,12 @@ document.querySelectorAll("accordion").forEach((accordion) => {
   accordion.style.display = "flex";
   accordion.style.flexDirection = "column";
   accordion.style.gap = "4px";
+  accordion.style.padding = `${size()}px 0`;
   accordion.querySelectorAll("accordionItem").forEach((item) => {
     item.style.display = "block";
     item.style.backgroundColor = "#fff";
-    item.style.borderRadius = "4px";
-    item.style.border = `1px solid ${colorChanger(0.8, colorScheme())}`;
+    item.style.borderTop = `1px solid ${colorChanger(0.8, colorScheme())}`;
+    item.style.borderBottom = `1px solid ${colorChanger(0.8, colorScheme())}`;
   });
   accordion.querySelectorAll("accordionButton").forEach((btn) => {
     btn.style.display = "flex";
@@ -226,13 +228,12 @@ document.querySelectorAll("accordion").forEach((accordion) => {
     btn.style.userSelect = "none";
     btn.style.padding = `${size() / 2}px ${size()}px`;
     btn.style.color = colorScheme();
-    btn.style.backgroundColor = colorChanger(0.9, colorScheme());
     btn.style.fontWeight = "400";
     btn.addEventListener("mouseover", function () {
-      this.style.backgroundColor = colorChanger(0.8, colorScheme());
+      this.style.backgroundColor = colorChanger(0.95, colorScheme());
     });
     btn.addEventListener("mouseleave", function () {
-      this.style.backgroundColor = colorChanger(0.9, colorScheme());
+      this.style.backgroundColor = "transparent";
     });
     btn.addEventListener("click", function () {
       this.classList.toggle("active");
@@ -505,22 +506,21 @@ document.querySelectorAll("button").forEach((btn) => {
       break;
     }
     case "secondary": {
-      btn.style.backgroundColor = "#fff";
+      btn.style.backgroundColor = colorChanger(0.88, "#000");
       btn.style.border = "0 solid transparent";
       btn.style.outline = "0";
       btn.style.color = "#000";
-      btn.style.boxShadow = "0 1px 1px 1px rgba(0, 0, 0, 0.1)";
       btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(0.95, "#000");
+        this.style.backgroundColor = colorChanger(0.8, "#000");
       });
       btn.addEventListener("mouseleave", function () {
-        this.style.backgroundColor = "#fff";
+        this.style.backgroundColor = colorChanger(0.88, "#000");
       });
       btn.addEventListener("mousedown", function () {
-        this.style.backgroundColor = colorChanger(0.9, "#000");
+        this.style.backgroundColor = colorChanger(0.75, "#000");
       });
       btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(0.95, "#000");
+        this.style.backgroundColor = colorChanger(0.8, "#000");
       });
       break;
     }
@@ -539,6 +539,8 @@ document.querySelectorAll("button").forEach((btn) => {
 });
 // menu
 document.querySelectorAll("menu").forEach((menu) => {
+  menu.style.backgroundColor = "#F2F2F7";
+  menu.style.padding = `${size()}px 0`;
   function size() {
     var componentSize = menu.getAttribute("size");
     if (componentSize == null) {
@@ -561,34 +563,37 @@ document.querySelectorAll("menu").forEach((menu) => {
     } else {
       // prettier-ignore
       stack.innerHTML = `
-      <p style="color: rgba(0, 0, 0, 0.26); font-weight: 600; font-size: ${size() / 1.15}px; margin-bottom: ${size() / 4}px; margin-left: ${size() / 1.2}px;">${stack.getAttribute("title")}</p>
-      ${stack.innerHTML}
+      <p style="text-transform: uppercase; color: rgba(0, 0, 0, 0.3); font-weight: 700; font-size: ${size() / 1.25}px; margin-bottom: ${size() / 4}px; margin-left: ${size() / 1.2}px;">${stack.getAttribute("title")}</p>
+      <div style="border-bottom: 1px solid ${colorChanger(0.8, color())}; border-top: 1px solid ${colorChanger(0.8, color())}; background-color: #fff; padding-left: ${size() / 1.2}px;">${stack.innerHTML}</div>
       `;
     }
     stack.style.display = "block";
     stack.querySelectorAll("menuButton").forEach((btn) => {
       btn.style.fontSize = size() + "px";
-      btn.style.padding = `${size() / 2}px ${size() / 1.2}px`;
-      btn.style.backgroundColor = "transparent";
-      btn.style.borderRadius = size() / 2 + "px";
+      btn.style.padding = `${size() / 2}px ${size() / 1.2}px ${size() / 2}px 0`;
+      btn.style.borderRadius = 0;
       btn.style.cursor = "pointer";
       btn.style.display = "flex";
       btn.style.alignItems = "center";
       btn.style.gap = size() / 2 + "px";
       btn.style.width = "100%";
-      btn.style.transition = `.2s ${easing}`;
+      btn.style.borderTop = `1px solid ${colorChanger(0.8, color())}`;
+      btn.style.userSelect = "none";
       btn.addEventListener("mouseover", function () {
-        this.style.backgroundColor = colorChanger(0.85, color());
+        this.style.backgroundColor = colorChanger(0.95, color());
       });
       btn.addEventListener("mouseleave", function () {
-        this.style.backgroundColor = "transparent";
+        this.style.backgroundColor = "#fff";
       });
       btn.addEventListener("mousedown", function () {
-        this.style.backgroundColor = colorChanger(0.87, color());
+        this.style.backgroundColor = colorChanger(0.92, color());
       });
       btn.addEventListener("mouseup", function () {
-        this.style.backgroundColor = colorChanger(0.85, color());
+        this.style.backgroundColor = colorChanger(0.95, color());
       });
+    });
+    stack.querySelectorAll("menuButton:first-child").forEach((btn) => {
+      btn.style.borderTop = "0";
     });
   });
   menu.querySelectorAll("menuStack:not(:last-child)").forEach((stack) => {
