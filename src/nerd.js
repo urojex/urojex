@@ -1,12 +1,13 @@
 var fontLink =
   "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap')";
-var fontName = "'Inter', sans-serif";
+var fontName = "'SFProDisplay', monospace";
 document.head.insertAdjacentHTML(
   "afterbegin",
   `
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../font/stylesheet.css">
   <style>
   ${fontLink};
   * {
@@ -564,20 +565,23 @@ document.querySelectorAll("menu").forEach((menu) => {
       // prettier-ignore
       stack.innerHTML = `
       <p style="text-transform: uppercase; color: rgba(0, 0, 0, 0.3); font-weight: 700; font-size: ${size() / 1.25}px; margin-bottom: ${size() / 4}px; margin-left: ${size() / 1.2}px;">${stack.getAttribute("title")}</p>
-      <div style="border-bottom: 1px solid ${colorChanger(0.8, color())}; border-top: 1px solid ${colorChanger(0.8, color())}; background-color: #fff; padding-left: ${size() / 1.2}px;">${stack.innerHTML}</div>
+      <div style="border-bottom: 1px solid ${colorChanger(0.8, color())}; border-top: 1px solid ${colorChanger(0.8, color())}; background-color: #fff;">${stack.innerHTML}</div>
       `;
     }
     stack.style.display = "block";
     stack.querySelectorAll("menuButton").forEach((btn) => {
+      // prettier-ignore
+      btn.innerHTML = `
+      <div style="border-bottom: 1px solid ${colorChanger(0.8, color())}; width: 100%; padding: ${size() / 2}px ${size() / 1.2}px ${size() / 2}px 0;">${btn.innerText}</div>
+      `;
+      btn.style.paddingLeft = size() / 1.2 + "px";
       btn.style.fontSize = size() + "px";
-      btn.style.padding = `${size() / 2}px ${size() / 1.2}px ${size() / 2}px 0`;
       btn.style.borderRadius = 0;
       btn.style.cursor = "pointer";
       btn.style.display = "flex";
       btn.style.alignItems = "center";
       btn.style.gap = size() / 2 + "px";
       btn.style.width = "100%";
-      btn.style.borderTop = `1px solid ${colorChanger(0.8, color())}`;
       btn.style.userSelect = "none";
       btn.addEventListener("mouseover", function () {
         this.style.backgroundColor = colorChanger(0.95, color());
@@ -592,8 +596,10 @@ document.querySelectorAll("menu").forEach((menu) => {
         this.style.backgroundColor = colorChanger(0.95, color());
       });
     });
-    stack.querySelectorAll("menuButton:first-child").forEach((btn) => {
-      btn.style.borderTop = "0";
+    stack.querySelectorAll("menuButton:last-child").forEach((btn) => {
+      btn.querySelectorAll("div").forEach((div) => {
+        div.style.borderBottom = 0;
+      });
     });
   });
   menu.querySelectorAll("menuStack:not(:last-child)").forEach((stack) => {
