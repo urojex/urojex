@@ -801,14 +801,72 @@ document.querySelectorAll("checkBox").forEach((check) => {
   }
   if (check.hasAttribute("disabled") == true) {
     check.style.pointerEvents = "none";
-    if (check.hasAttribute("checked") == true) {
-      label.style.backgroundColor = "#F4F5F5";
-      label.querySelector("svg path").style.fill = colorChanger(0.6, "#000");
-      label.style.outline = `1px solid ${colorChanger(0.75, "#000")}`;
-      label.style.outlineOffset = "-1px";
+    check.style.opacity = 0.5;
+  }
+});
+document.querySelectorAll("radio").forEach((radio) => {
+  function className() {
+    var componentClassName = radio.getAttribute("class");
+    if (componentClassName == null) {
+      return "";
     } else {
-      label.style.backgroundColor = colorChanger(0.85, "#000");
-      label.style.border = "1px solid transparent";
+      return componentClassName;
     }
+  }
+  function id() {
+    var componentid = radio.getAttribute("id");
+    if (componentid == null) {
+      return "";
+    } else {
+      return componentid;
+    }
+  }
+  function size() {
+    var componentSize = radio.getAttribute("size");
+    if (componentSize == null) {
+      return "16";
+    } else {
+      return componentSize;
+    }
+  }
+  function color() {
+    var componentColor = radio.getAttribute("color");
+    if (componentColor == null) {
+      return "#007AFF";
+    } else {
+      return componentColor;
+    }
+  }
+  const newRadio = document.createElement("label");
+  newRadio.innerHTML = `<div><input type="radio" name="radio" class="${className()}" id="${id()}"></div>`;
+  radio.parentNode.replaceChild(newRadio, radio);
+  const div = newRadio.querySelector("div");
+  const input = newRadio.querySelector("input");
+  input.style.cursor = "pointer";
+  input.style.opacity = 0;
+  div.style.height = div.style.width = size() + "px";
+  div.style.border = `1px solid rgba(0, 0, 0, 0.26)`;
+  div.style.backgroundColor = "#fff";
+  div.style.borderRadius = "50%";
+  div.style.cursor = "pointer";
+  div.style.transition = `.2s ${easing}`;
+  newRadio.addEventListener("click", function () {
+    // prettier-ignore
+    this.parentElement.parentElement.querySelectorAll("div:has(> input)").forEach((div) => {
+      div.style.border = `1px solid rgba(0, 0, 0, 0.26)`;
+    });
+    this.querySelector("div").style.border = `${size() / 4}px solid ${color()}`;
+  });
+  if (radio.hasAttribute("checked") == true) {
+    input.checked = true;
+    // prettier-ignore
+    newRadio.parentElement.parentElement.querySelectorAll("div:has(> input)").forEach((div) => {
+      div.style.border = `1px solid rgba(0, 0, 0, 0.26)`;
+    });
+    div.style.border = `${size() / 4}px solid ${color()}`;
+  }
+  if (radio.hasAttribute("disabled") == true) {
+    newRadio.style.pointerEvents = "none";
+    newRadio.style.opacity = "0.5";
   }
 });
