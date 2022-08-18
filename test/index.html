@@ -129,7 +129,24 @@
           </text>
         </box>
         <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
-          <checkBox class="ac" id="ad"></checkBox>
+          <flexBox direction="column" gap="4">
+            <flexBox gap="8" alignItems="center">
+              <checkBox class="ac" id="ad"></checkBox>
+              <text weight="400" size="14">Unchecked</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <checkBox class="ac" id="ad" checked></checkBox>
+              <text weight="400" size="14">Checked</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <checkBox class="ac" id="ad" disabled></checkBox>
+              <text weight="400" size="14">Unchecked, disabled</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <checkBox class="ac" id="ad" checked disabled></checkBox>
+              <text weight="400" size="14">Checked, disabled</text>
+            </flexBox>
+          </flexBox>
         </box>
       </flexBox>
     </box>

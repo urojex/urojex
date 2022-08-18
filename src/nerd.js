@@ -436,7 +436,7 @@ document.querySelectorAll("badge").forEach((badge) => {
   }
   badge.style.display = "inline-block";
   badge.style.padding = `${size() / 5}px ${size() / 1.5}px`;
-  badge.style.borderRadius = size() / 2.5 + "px";
+  badge.style.borderRadius = badge.scrollHeight / 2 + "px";
   badge.style.fontSize = size() + "px";
   badge.style.fontWeight = 600;
 });
@@ -736,7 +736,7 @@ document.querySelectorAll("checkBox").forEach((check) => {
     }
   }
   function size() {
-    var componentSize = check.getAttribut("size");
+    var componentSize = check.getAttribute("size");
     if (componentSize == null) {
       return "16";
     } else {
@@ -754,4 +754,61 @@ document.querySelectorAll("checkBox").forEach((check) => {
   check.innerHTML = `<label><input type="checkbox" class="${className()}" id="${id()}" /></label>`;
   check.setAttribute("class", "");
   check.setAttribute("id", "");
+  var label = check.querySelector("label");
+  label.insertAdjacentHTML(
+    "beforeend",
+    `
+    <svg width="${size()}" height="${size()}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 50%; left: 50%; transition: .2s ${easing}">
+      <path d="M6.96143 13.687C7.40576 13.687 7.75488 13.5156 7.99609 13.1602L13.9058 4.15283C14.0771 3.89258 14.147 3.64502 14.147 3.4165C14.147 2.80078 13.6772 2.34375 13.0425 2.34375C12.6108 2.34375 12.3379 2.50244 12.0713 2.91504L6.93604 11.0146L4.3335 7.82178C4.09229 7.52979 3.82568 7.40283 3.45752 7.40283C2.81641 7.40283 2.35303 7.85986 2.35303 8.48193C2.35303 8.76123 2.43555 9.00244 2.67676 9.27539L5.95215 13.2109C6.2251 13.5347 6.54248 13.687 6.96143 13.687Z" fill="#fff"/>
+    </svg>
+  `
+  );
+  var input = check.querySelector("input");
+  input.style.opacity = 0;
+  input.style.cursor = "pointer";
+  label.style.position = "relative";
+  label.style.display = "block";
+  label.style.cursor = "pointer";
+  label.style.height = size() + "px";
+  label.style.width = size() + "px";
+  label.style.border = "1px solid rgba(0, 0, 0, 0.26)";
+  label.style.borderRadius = size() / 4 + "px";
+  label.style.transition = `.2s ${easing}`;
+  // prettier-ignore
+  label.querySelector("svg").style.transform = "translate(-50%, -10%)";
+  label.querySelector("svg").style.opacity = "0";
+  label.addEventListener("click", function () {
+    if (input.checked == true) {
+      this.style.backgroundColor = color();
+      this.style.border = "1px solid transparent";
+      // prettier-ignore
+      this.querySelector("svg").style.transform = "translate(-50%, -50%)";
+      this.querySelector("svg").style.opacity = 1;
+    } else {
+      this.style.backgroundColor = "#fff";
+      this.style.border = "1px solid rgba(0, 0, 0, 0.26)";
+      // prettier-ignore
+      this.querySelector("svg").style.transform = "translate(-50%, -10%)";
+      this.querySelector("svg").style.opacity = 0;
+    }
+  });
+  if (check.hasAttribute("checked") == true) {
+    check.querySelector("input").checked = true;
+    label.style.backgroundColor = color();
+    label.style.border = "1px solid transparent";
+    label.querySelector("svg").style.opacity = 1;
+    label.querySelector("svg").style.transform = "translate(-50%, -50%)";
+  }
+  if (check.hasAttribute("disabled") == true) {
+    check.style.pointerEvents = "none";
+    if (check.hasAttribute("checked") == true) {
+      label.style.backgroundColor = "#F4F5F5";
+      label.querySelector("svg path").style.fill = colorChanger(0.6, "#000");
+      label.style.outline = `1px solid ${colorChanger(0.75, "#000")}`;
+      label.style.outlineOffset = "-1px";
+    } else {
+      label.style.backgroundColor = colorChanger(0.85, "#000");
+      label.style.border = "1px solid transparent";
+    }
+  }
 });
