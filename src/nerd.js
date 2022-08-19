@@ -1103,6 +1103,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
 );
 // text field
 document.querySelectorAll("textField").forEach((field) => {
+  function color() {
+    var componentColor = field.getAttribute("color");
+    if (componentColor == null) {
+      return "#007AFF";
+    } else {
+      return componentColor;
+    }
+  }
   function className() {
     var componentClass = field.getAttribute("class");
     if (componentClass == null) {
@@ -1203,6 +1211,81 @@ document.querySelectorAll("textField").forEach((field) => {
     input.focus();
     this.style.display = "none";
   });
+  var autocompleteQuery = field.getAttribute("autoCompleteQuery");
+  if (autocompleteQuery != null) {
+    var suggestionsList = field.getAttribute("autoCompleteQuery").split(/,\s+/);
+    console.log(suggestionsList);
+    input.setAttribute("autocomplete", "off");
+    field.insertAdjacentHTML("beforeend", `<ul id="suggestions"></ul>`);
+    (function () {
+      "use strict";
+      let inputField = input;
+      let ulField = field.querySelector("#suggestions");
+      inputField.addEventListener("input", changeAutoComplete);
+      ulField.addEventListener("click", selectItem);
+      function changeAutoComplete({ target }) {
+        let data = target.value;
+        ulField.innerHTML = ``;
+        if (data.length) {
+          let autoCompleteValues = autoComplete(data);
+          autoCompleteValues.forEach((value) => addItem(value));
+        }
+        var suggestions = field.querySelector("ul");
+        var suggestionsItems = field.querySelectorAll("ul li");
+        suggestions.style.position = "absolute";
+        suggestions.style.bottom = 0;
+        suggestions.style.left = 0;
+        suggestions.style.transform = "translateY(calc(100% + 10px))";
+        suggestions.style.display = "block";
+        suggestions.style.minWidth = "150px";
+        suggestions.style.backgroundColor = "#F4F5F5";
+        suggestions.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+        suggestions.style.borderRadius = "5px";
+        suggestions.style.boxShadow = "0 5px 10px 0 rgba(0, 0, 0, 0.16)";
+        suggestions.style.overflow = "hidden";
+        suggestionsItems.forEach((item) => {
+          item.style.listStyle = "none";
+          item.style.padding = "4px 12px";
+          item.style.cursor = "pointer";
+          item.addEventListener("mouseover", function () {
+            this.style.backgroundColor = color();
+            this.style.color = "#fff";
+          });
+          item.addEventListener("mouseleave", function () {
+            this.style.backgroundColor = "transparent";
+            this.style.color = "#000";
+          });
+        });
+      }
+      function autoComplete(inputValue) {
+        let destination = suggestionsList;
+        return destination.filter((value) =>
+          value.toLowerCase().includes(inputValue.toLowerCase())
+        );
+      }
+      function addItem(value) {
+        ulField.innerHTML = ulField.innerHTML + `<li>${value}</li>`;
+      }
+      function selectItem({ target }) {
+        if (target.tagName === "LI") {
+          inputField.value = target.textContent;
+          ulField.innerHTML = ``;
+          ulField.style.border = 0;
+        }
+      }
+    })();
+    var suggestions = field.querySelector("ul");
+    var suggestionsItems = field.querySelectorAll("ul li");
+    suggestions.style.position = "absolute";
+    suggestions.style.bottom = 0;
+    suggestions.style.left = 0;
+    suggestions.style.transform = "translateY(calc(100% + 10px))";
+    suggestions.style.display = "block";
+    suggestions.style.backgroundColor = "#000";
+    suggestionsItems.forEach((item) => {
+      item.style.listStyle = "none";
+    });
+  }
 });
 document.head.insertAdjacentHTML(
   "beforeend",

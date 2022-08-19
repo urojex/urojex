@@ -201,7 +201,10 @@
           </flexBox>
         </box>
         <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
-          <textField class="ac" id="ad" value="Value" placeholder="Placeholder"></textField>
+          <flexBox alignItems="center" gap="8">
+            <text size="15" weight="400">Try typing "a"</text>
+            <textField class="ac" id="ad" value="Value" placeholder="Placeholder" autocompleteQuery="Ban, Banana, Apple, Durian, Grape"></textField>
+          </flexBox>
         </box>
       </flexBox>
     </box>
