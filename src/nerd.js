@@ -764,8 +764,11 @@ document.querySelectorAll("checkBox").forEach((check) => {
   `
   );
   var input = check.querySelector("input");
+  check.style.position = "relative";
+  input.style.position = "absolute";
   input.style.opacity = 0;
   input.style.cursor = "pointer";
+  input.style.height = input.style.width = 0;
   label.style.position = "relative";
   label.style.display = "block";
   label.style.cursor = "pointer";
@@ -842,8 +845,11 @@ document.querySelectorAll("radio").forEach((radio) => {
   radio.parentNode.replaceChild(newRadio, radio);
   const div = newRadio.querySelector("div");
   const input = newRadio.querySelector("input");
+  radio.style.position = "relative";
+  input.style.position = "absolute";
   input.style.cursor = "pointer";
   input.style.opacity = 0;
+  input.style.height = input.style.width = 0;
   div.style.height = div.style.width = size() + "px";
   div.style.border = `1px solid rgba(0, 0, 0, 0.26)`;
   div.style.backgroundColor = "#fff";
@@ -868,5 +874,86 @@ document.querySelectorAll("radio").forEach((radio) => {
   if (radio.hasAttribute("disabled") == true) {
     newRadio.style.pointerEvents = "none";
     newRadio.style.opacity = "0.5";
+  }
+});
+document.querySelectorAll("toggle").forEach((toggle) => {
+  function className() {
+    var componentClassName = toggle.getAttribute("class");
+    if (componentClassName == null) {
+      return "";
+    } else {
+      return componentClassName;
+    }
+  }
+  function id() {
+    var componentid = toggle.getAttribute("id");
+    if (componentid == null) {
+      return "";
+    } else {
+      return componentid;
+    }
+  }
+  function size() {
+    var componentSize = toggle.getAttribute("size");
+    if (componentSize == null) {
+      return "22";
+    } else {
+      return componentSize;
+    }
+  }
+  function color() {
+    var componentColor = toggle.getAttribute("color");
+    if (componentColor == null) {
+      return "#007AFF";
+    } else {
+      return componentColor;
+    }
+  }
+  toggle.innerHTML = `
+  <label>
+    <input type="checkbox" class="${className()}" id="${id()}" />
+    <div class="outer">
+      <div class="inner"></div>
+    </div>
+  </label>`;
+  toggle.setAttribute("class", "");
+  toggle.setAttribute("id", "");
+  var label = toggle.querySelector("label");
+  var outer = toggle.querySelector(".outer");
+  var inner = toggle.querySelector(".inner");
+  var input = toggle.querySelector("input");
+  toggle.style.position = "relative";
+  input.style.position = "absolute";
+  label.style.cursor = "pointer";
+  input.style.opacity = 0;
+  outer.style.height = size() + "px";
+  outer.style.width = size() * 1.6 + "px";
+  outer.style.backgroundColor = `rgba(0, 0, 0, 0.1)`;
+  outer.style.borderRadius = outer.scrollHeight / 2 + "px";
+  outer.style.position = "relative";
+  inner.style.height = inner.style.width = size() - 2 + "px";
+  inner.style.backgroundColor = "#fff";
+  inner.style.borderRadius = "50%";
+  inner.style.position = "absolute";
+  inner.style.left = "1px";
+  inner.style.top = "1px";
+  outer.style.transition = inner.style.transition = `.2s ${easing}`;
+  label.addEventListener("click", function () {
+    if (input.checked) {
+      outer.style.backgroundColor = color();
+      inner.style.left = outer.scrollWidth - (size() - 2) - 1 + "px";
+    } else {
+      outer.style.backgroundColor = `rgba(0, 0, 0, 0.1)`;
+      inner.style.left = "1px";
+    }
+  });
+  if (toggle.hasAttribute("checked") == true) {
+    input.checked = true;
+    outer.style.backgroundColor = color();
+    inner.style.left = outer.scrollWidth - (size() - 2) - 1 + "px";
+  }
+  if (toggle.hasAttribute("disabled") == true) {
+    toggle.style.pointerEvents = "none";
+    toggle.style.opacity = 0.5;
   }
 });

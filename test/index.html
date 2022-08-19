@@ -164,6 +164,26 @@
             </flexBox>
           </flexBox>
         </box>
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
+          <flexBox direction="column" gap="4">
+            <flexBox gap="8" alignItems="center">
+              <toggle class="ac" id="ad"></toggle>
+              <text weight="400" size="14">Unchecked</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <toggle class="ac" id="ad" checked></toggle>
+              <text weight="400" size="14">Checked</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <toggle class="ac" id="ad" disabled></toggle>
+              <text weight="400" size="14">Unchecked, disabled</text>
+            </flexBox>
+            <flexBox gap="8" alignItems="center">
+              <toggle class="ac" id="ad" checked disabled></toggle>
+              <text weight="400" size="14">Checked, disabled</text>
+            </flexBox>
+          </flexBox>
+        </box>
       </flexBox>
     </box>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
