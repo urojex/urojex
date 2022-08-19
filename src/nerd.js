@@ -957,3 +957,144 @@ document.querySelectorAll("toggle").forEach((toggle) => {
     toggle.style.opacity = 0.5;
   }
 });
+document.querySelectorAll("range").forEach((range) => {
+  function className() {
+    var componentClassName = range.getAttribute("class");
+    if (componentClassName == null) {
+      return "";
+    } else {
+      return componentClassName;
+    }
+  }
+  function id() {
+    var componentid = range.getAttribute("id");
+    if (componentid == null) {
+      return "";
+    } else {
+      return componentid;
+    }
+  }
+  function value() {
+    var componentValue = range.getAttribute("value");
+    if (componentValue == null) {
+      return 50;
+    } else {
+      return componentValue;
+    }
+  }
+  function min() {
+    var componentMin = range.getAttribute("min");
+    if (componentMin == null) {
+      return 0;
+    } else {
+      return componentMin;
+    }
+  }
+  function max() {
+    var componentMax = range.getAttribute("max");
+    if (componentMax == null) {
+      return 300;
+    } else {
+      return componentMax;
+    }
+  }
+  function size() {
+    var componentSize = range.getAttribute("size");
+    if (componentSize == null) {
+      return "300";
+    } else {
+      return componentSize;
+    }
+  }
+  function color() {
+    var componentColor = range.getAttribute("color");
+    if (componentColor == null) {
+      return "#007AFF";
+    } else {
+      return componentColor;
+    }
+  }
+  range.innerHTML = `
+  <input type="range" class="${className()}" id="${id()}" value="${value()}" min="${min()}" max="${max()}">
+  `;
+  range.setAttribute("class", "");
+  range.setAttribute("id", "");
+  var input = range.querySelector("input");
+  input.style.display = "block";
+  input.style.appearance = "none";
+  input.style.borderRadius = input.scrollHeight / 2 + "px";
+  input.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+  input.style.width = size() + "px";
+  input.style.height = "4px";
+  input.addEventListener("input", slider);
+  function slider() {
+    var percent = (input.value / input.max) * 100;
+    input.style.background = `linear-gradient(to right, ${color()} ${percent}%, rgba(0, 0, 0, 0.1) ${percent}%)`;
+  }
+  slider();
+  if (range.hasAttribute("disabled") == true) {
+    input.style.pointerEvents = "none";
+    input.style.opacity = "0.5";
+  }
+});
+document.head.insertAdjacentHTML(
+  "beforeend",
+  `
+<style>
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+}
+input[type="range"]::-moz-track {
+  -moz-appearance: none;
+}
+input[type="range"]::-ms-track {
+  appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: ${colorChanger(0.9, "#000")};
+}
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: ${colorChanger(0.9, "#000")};
+}
+input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: ${colorChanger(0.9, "#000")};
+}
+</style>
+`
+);
