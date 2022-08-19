@@ -957,7 +957,7 @@ document.querySelectorAll("toggle").forEach((toggle) => {
     toggle.style.opacity = 0.5;
   }
 });
-document.querySelectorAll("range").forEach((range) => {
+document.querySelectorAll("slider").forEach((range) => {
   function className() {
     var componentClassName = range.getAttribute("class");
     if (componentClassName == null) {
