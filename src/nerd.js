@@ -764,6 +764,7 @@ document.querySelectorAll("checkBox").forEach((check) => {
   `
   );
   var input = check.querySelector("input");
+  check.style.display = "block";
   check.style.position = "relative";
   input.style.position = "absolute";
   input.style.opacity = 0;
@@ -845,6 +846,7 @@ document.querySelectorAll("radio").forEach((radio) => {
   radio.parentNode.replaceChild(newRadio, radio);
   const div = newRadio.querySelector("div");
   const input = newRadio.querySelector("input");
+  radio.style.display = "block";
   radio.style.position = "relative";
   input.style.position = "absolute";
   input.style.cursor = "pointer";
@@ -922,6 +924,7 @@ document.querySelectorAll("toggle").forEach((toggle) => {
   var outer = toggle.querySelector(".outer");
   var inner = toggle.querySelector(".inner");
   var input = toggle.querySelector("input");
+  toggle.style.display = "block";
   toggle.style.position = "relative";
   input.style.position = "absolute";
   label.style.cursor = "pointer";
@@ -1095,6 +1098,133 @@ input[type="range"]::-ms-thumb {
 input[type="range"]::-webkit-slider-thumb:hover {
   background-color: ${colorChanger(0.9, "#000")};
 }
+</style>
+`
+);
+// text field
+document.querySelectorAll("textField").forEach((field) => {
+  function className() {
+    var componentClass = field.getAttribute("class");
+    if (componentClass == null) {
+      return "";
+    } else {
+      return componentClass;
+    }
+  }
+  function id() {
+    var componentId = field.getAttribute("id");
+    if (componentId == null) {
+      return "";
+    } else {
+      return componentId;
+    }
+  }
+  function placeholder() {
+    var componentplaceholder = field.getAttribute("placeholder");
+    if (componentplaceholder == null) {
+      return "";
+    } else {
+      return componentplaceholder;
+    }
+  }
+  function value() {
+    var componentVal = field.getAttribute("value");
+    if (componentVal == null) {
+      return "";
+    } else {
+      return componentVal;
+    }
+  }
+  function type() {
+    var componentType = field.getAttribute("type");
+    if (componentType == null) {
+      return "text";
+    } else {
+      return componentType;
+    }
+  }
+  function size() {
+    var componentSize = field.getAttribute("size");
+    if (componentSize == null) {
+      return 15;
+    } else {
+      return componentSize;
+    }
+  }
+  function width() {
+    var componentWidth = field.getAttribute("width");
+    if (componentWidth == null) {
+      return "200px";
+    } else {
+      return componentWidth;
+    }
+  }
+  field.innerHTML = `<input type="${type()}" class="${className()}" id="${id()}" value="${value()}" placeholder="${placeholder()}">`;
+  field.style.display = "block";
+  field.style.width = "fit-content";
+  field.style.position = "relative";
+  var input = field.querySelector("input");
+  input.style.outline = 0;
+  input.style.padding = `${size() / 4}px ${size() / 2}px`;
+  input.style.width = width();
+  input.style.borderRadius = size() / 2 + "px";
+  input.style.fontSize = size() + "px";
+  // prettier-ignore
+  field.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="clear" style="position: absolute; top: 50%; right: ${size() / 2}px; transform: translateY(-50%); background-color: red; width: ${size() / 1.2}px; height: ${size() / 1.2}px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center;">
+      <svg width="${size() / 1.7}" height="${size() / 1.7}" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.691406 4.91504C0.527344 5.08203 0.518555 5.38965 0.697266 5.56543C0.875977 5.74414 1.18066 5.73828 1.34766 5.57129L3 3.91895L4.64941 5.56836C4.82227 5.74414 5.12109 5.74121 5.29688 5.5625C5.47559 5.38672 5.47559 5.08789 5.30273 4.91504L3.65332 3.26562L5.30273 1.61328C5.47559 1.44043 5.47559 1.1416 5.29688 0.96582C5.12109 0.787109 4.82227 0.787109 4.64941 0.959961L3 2.60938L1.34766 0.957031C1.18066 0.792969 0.873047 0.78418 0.697266 0.962891C0.521484 1.1416 0.527344 1.44629 0.691406 1.61328L2.34375 3.26562L0.691406 4.91504Z" fill="white"/>
+      </svg>
+    </div>
+  `
+  );
+  var clear = field.querySelector(".clear");
+  clear.style.display = "none";
+  input.addEventListener("input", showClear);
+  function showClear() {
+    if (input.value != "") {
+      clear.style.display = "flex";
+    } else {
+      clear.style.display = "none";
+    }
+  }
+  showClear();
+  clear.addEventListener("mouseover", function () {
+    this.style.backgroundColor = "rgba(0, 0, 0, 0.75)";
+    this.style.cursor = "pointer";
+  });
+  clear.addEventListener("mouseleave", function () {
+    this.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+  });
+  clear.addEventListener("click", function () {
+    input.value = "";
+    input.focus();
+    this.style.display = "none";
+  });
+});
+document.head.insertAdjacentHTML(
+  "beforeend",
+  `
+<style>
+  input[type="text"],
+  input[type="password"] {
+    border: 1px solid ${colorChanger(0.75, "#000")};
+    color: ${colorChanger(0.1, "#000")};
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.05);
+  }
+  input[type="text"]:hover,
+  input[type="password"]:hover {
+    border-color: ${colorChanger(0.6, "#000")};
+    color: ${colorChanger(0, "#000")};
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: rgba(0, 103, 244, 0.25);
+    box-shadow: 0 0 0 2px rgba(0, 103, 244, 0.25);
+    color: ${colorChanger(0, "#000")};
+  }
 </style>
 `
 );
