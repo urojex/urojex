@@ -206,6 +206,31 @@
             <textField class="ac" id="ad" value="Value" placeholder="Placeholder" autocompleteQuery="Ban, Banana, Apple, Durian, Grape"></textField>
           </flexBox>
         </box>
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
+          <box border="1px solid rgba(0, 0, 0, 0.1)" padding="16px" rounded="7px" width="260px" shadow="0 20px 25px 0 rgba(0, 0, 0, 0.25)">
+            <text size="16" weight="700" margin="0 0 12px 0" display="block" align="center">Alert title will be here</text>
+            <text size="14" weight="400" margin="0 0 12px 0" display="block" align="center">Alert message will be displayed here once the alert is going to be presented whenever it needs to.</text>
+            <flexBox gap="10" width="100%">
+              <button size="16" block="true">Alert Button</button>
+              <button size="16" block="true" variant="secondary">Alert Button</button>
+            </flexBox>
+          </box>
+        </box>
+        <box padding="16px" border="1px solid #ddd" rounded="10px" width="100%">
+          <modal>
+            <modalButton><button>Open modal</button></modalButton>
+            <modalSheet>
+              <box border="1px solid rgba(0, 0, 0, 0.1)" padding="16px" rounded="7px" width="260px" shadow="0 20px 25px 0 rgba(0, 0, 0, 0.25)" background="#fff">
+                <text size="16" weight="700" margin="0 0 12px 0" display="block" align="center">Alert title will be here</text>
+                <text size="14" weight="400" margin="0 0 12px 0" display="block" align="center">Alert message will be displayed here once the alert is going to be presented whenever it needs to.</text>
+                <flexBox gap="10" width="100%">
+                  <button size="16" block="true">Alert Button</button>
+                  <button size="16" block="true" variant="secondary">Alert Button</button>
+                </flexBox>
+              </box>
+            </modalSheet>
+          </modal>
+        </box>
       </flexBox>
     </box>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -122,6 +122,15 @@ document.querySelectorAll("box").forEach((box) => {
       return componentBg;
     }
   }
+  function shadow() {
+    var componentShadow = box.getAttribute("shadow");
+    if (componentShadow == null) {
+      return "0 0 0 0 transparent";
+    } else {
+      return componentShadow;
+    }
+  }
+  box.style.boxShadow = shadow();
   box.style.background = background();
   box.style.width = width();
   box.style.height = height();
@@ -471,6 +480,15 @@ document.querySelectorAll("button").forEach((btn) => {
       return componentColor;
     }
   }
+  function display() {
+    var componentDisplay = btn.getAttribute("block");
+    if (componentDisplay == "true") {
+      btn.style.width = "100%";
+      return "block";
+    } else if (componentDisplay == true) {
+      return "inline-block";
+    }
+  }
   function variant() {
     var componentVariant = btn.getAttribute("variant");
     if (componentVariant == null) {
@@ -526,6 +544,7 @@ document.querySelectorAll("button").forEach((btn) => {
       break;
     }
   }
+  btn.style.display = display();
   btn.style.fontSize = size() + "px";
   btn.style.fontWeight = 400;
   btn.style.cursor = "pointer";
@@ -1214,7 +1233,6 @@ document.querySelectorAll("textField").forEach((field) => {
   var autocompleteQuery = field.getAttribute("autoCompleteQuery");
   if (autocompleteQuery != null) {
     var suggestionsList = field.getAttribute("autoCompleteQuery").split(/,\s+/);
-    console.log(suggestionsList);
     input.setAttribute("autocomplete", "off");
     field.insertAdjacentHTML("beforeend", `<ul id="suggestions"></ul>`);
     (function () {
@@ -1239,9 +1257,9 @@ document.querySelectorAll("textField").forEach((field) => {
         suggestions.style.display = "block";
         suggestions.style.minWidth = "150px";
         suggestions.style.backgroundColor = "#F4F5F5";
-        suggestions.style.border = "1px solid rgba(0, 0, 0, 0.1)";
         suggestions.style.borderRadius = "5px";
-        suggestions.style.boxShadow = "0 5px 10px 0 rgba(0, 0, 0, 0.16)";
+        suggestions.style.boxShadow =
+          "inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 5px 10px 0 rgba(0, 0, 0, 0.16)";
         suggestions.style.overflow = "hidden";
         suggestionsItems.forEach((item) => {
           item.style.listStyle = "none";
@@ -1282,6 +1300,7 @@ document.querySelectorAll("textField").forEach((field) => {
     suggestions.style.transform = "translateY(calc(100% + 10px))";
     suggestions.style.display = "block";
     suggestions.style.backgroundColor = "#000";
+    suggestions.style.zIndex = 1;
     suggestionsItems.forEach((item) => {
       item.style.listStyle = "none";
     });
@@ -1311,3 +1330,65 @@ document.head.insertAdjacentHTML(
 </style>
 `
 );
+// modal
+document.querySelectorAll("modal").forEach((modal) => {
+  const overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.zIndex = "1";
+  overlay.style.height = "100vh";
+  overlay.style.width = "100vw";
+  overlay.style.backgroundColor = "transparent";
+  overlay.style.pointerEvents = "none";
+  overlay.style.transition = `.3s ${easing}`;
+  document.body.appendChild(overlay);
+  var btn = modal.querySelector("modalButton");
+  var sheet = modal.querySelector("modalSheet");
+  sheet.style.position = "fixed";
+  sheet.style.top = "50%";
+  sheet.style.left = "50%";
+  sheet.style.transform = "translate(-50%, -30%) scale(0.9)";
+  sheet.style.zIndex = 2;
+  sheet.style.pointerEvents = "none";
+  sheet.style.transition = `.4s cubic-bezier(0.22, 1, 0.36, 1)`;
+  sheet.style.opacity = 0;
+  sheet.style.width = sheet.style.height = "fit-content";
+  // prettier-ignore
+  sheet.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="clear" style="position: absolute; top: 6px; right: 6px; background-color: red; width: ${15 / 1.2}px; height: ${15 / 1.2}px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center;">
+      <svg width="${15 / 1.7}" height="${15 / 1.7}" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.691406 4.91504C0.527344 5.08203 0.518555 5.38965 0.697266 5.56543C0.875977 5.74414 1.18066 5.73828 1.34766 5.57129L3 3.91895L4.64941 5.56836C4.82227 5.74414 5.12109 5.74121 5.29688 5.5625C5.47559 5.38672 5.47559 5.08789 5.30273 4.91504L3.65332 3.26562L5.30273 1.61328C5.47559 1.44043 5.47559 1.1416 5.29688 0.96582C5.12109 0.787109 4.82227 0.787109 4.64941 0.959961L3 2.60938L1.34766 0.957031C1.18066 0.792969 0.873047 0.78418 0.697266 0.962891C0.521484 1.1416 0.527344 1.44629 0.691406 1.61328L2.34375 3.26562L0.691406 4.91504Z" fill="white"/>
+      </svg>
+    </div>
+  `
+  );
+  var clear = sheet.querySelector(".clear");
+  clear.style.cursor = "pointer";
+  clear.addEventListener("mouseover", function () {
+    this.style.backgroundColor = "rgba(0, 0, 0, 0.75)";
+  });
+  clear.addEventListener("mouseleave", function () {
+    this.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  });
+  btn.addEventListener("click", function () {
+    overlay.style.pointerEvents = "all";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+    overlay.style.backdropFilter = "blur(5px)";
+    sheet.style.transform = "translate(-50%, -50%) scale(1)";
+    sheet.style.pointerEvents = "all";
+    sheet.style.opacity = 1;
+    overlay.addEventListener("click", close);
+    clear.addEventListener("click", close);
+    function close() {
+      overlay.style.pointerEvents = "none";
+      overlay.style.backgroundColor = "transparent";
+      overlay.style.backdropFilter = "blur(0)";
+      sheet.style.transform = "translate(-50%, -30%) scale(0.9)";
+      sheet.style.pointerEvents = "none";
+      sheet.style.opacity = 0;
+    }
+  });
+});
