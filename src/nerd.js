@@ -1,28 +1,6 @@
 var fontLink =
   "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap')";
 var fontName = "'SFProDisplay', monospace";
-document.head.insertAdjacentHTML(
-  "afterbegin",
-  `
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../font/stylesheet.css">
-  <style>
-  ${fontLink};
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: ${fontName};
-  }
-  *::before, *::after {
-    box-sizing: border-box;
-  }
-  </style>
-`
-);
-const easing = "cubic-bezier(0, 0.55, 0.45, 1)";
 // prettier-ignore
 const colorChanger=(p,c0,c1,l)=>{
   let r,g,b,P,f,t,h,i=parseInt,m=Math.round,a=typeof(c1)=="string";
@@ -48,6 +26,50 @@ const colorChanger=(p,c0,c1,l)=>{
   if(h)return"rgb"+(f?"a(":"(")+r+","+g+","+b+(f?","+m(a*1000)/1000:"")+")";
   else return"#"+(4294967296+r*16777216+g*65536+b*256+(f?m(a*255):0)).toString(16).slice(1,f?undefined:-2)
 }
+document.head.insertAdjacentHTML(
+  "afterbegin",
+  `
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../font/stylesheet.css">
+  <style>
+  ${fontLink};
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: ${fontName};
+  }
+  *::before, *::after {
+    box-sizing: border-box;
+  }
+  ::selection {
+    background-color: rgba(0, 103, 244, 0.25);
+  }
+  *::-webkit-scrollbar {
+    width: 20px;
+  }
+  *::-webkit-scrollbar-track {
+    background-color: #FAFAFA;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 0 3px #fafafa;
+  }
+  *::-webkit-scrollbar-thumb {
+    appearance: none;
+    background-color: #C1C1C1;
+    border: 5px solid transparent;
+    background-clip: content-box;
+    border-radius: 20px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    appearance: none;
+    background-color: ${colorChanger(-0.3, "#C1C1C1")};
+  }
+  </style>
+`
+);
+const easing = "cubic-bezier(0, 0.55, 0.45, 1)";
 // Box
 document.querySelectorAll("box").forEach((box) => {
   function padding() {
@@ -1348,7 +1370,7 @@ document.querySelectorAll("modal").forEach((modal) => {
   sheet.style.position = "fixed";
   sheet.style.top = "50%";
   sheet.style.left = "50%";
-  sheet.style.transform = "translate(-50%, -30%) scale(0.9)";
+  sheet.style.transform = "translate(-50%, -30%) scale(1)";
   sheet.style.zIndex = 2;
   sheet.style.pointerEvents = "none";
   sheet.style.transition = `.4s cubic-bezier(0.22, 1, 0.36, 1)`;
@@ -1375,8 +1397,7 @@ document.querySelectorAll("modal").forEach((modal) => {
   });
   btn.addEventListener("click", function () {
     overlay.style.pointerEvents = "all";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
-    overlay.style.backdropFilter = "blur(5px)";
+    overlay.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
     sheet.style.transform = "translate(-50%, -50%) scale(1)";
     sheet.style.pointerEvents = "all";
     sheet.style.opacity = 1;
@@ -1385,8 +1406,7 @@ document.querySelectorAll("modal").forEach((modal) => {
     function close() {
       overlay.style.pointerEvents = "none";
       overlay.style.backgroundColor = "transparent";
-      overlay.style.backdropFilter = "blur(0)";
-      sheet.style.transform = "translate(-50%, -30%) scale(0.9)";
+      sheet.style.transform = "translate(-50%, -30%) scale(1)";
       sheet.style.pointerEvents = "none";
       sheet.style.opacity = 0;
     }
