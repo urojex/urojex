@@ -1,7 +1,7 @@
 {
   "name": "urojex",
   "version": "1.0.0",
-  "description": "Nerd is a simple, modular and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.",
+  "description": "Urojex is a simple, modular and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.",
   "main": "src/urojex.js",
   "directories": {
     "test": "test"
