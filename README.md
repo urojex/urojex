@@ -5,3 +5,9 @@ Urojex is a simple and accessible component library that gives you the building 
 - **Time saving**: Urojex makes it easier to design web your website by creating template for components by Javascript, so you will spend less time writing CSS :alarm_clock:
 - **Customizable**: Components can be changed in **color**, **size**, ... to fit your website :man_technologist:
 - **Too simple to get started!**: Just paste a CDN link into your HTML file and you can start using UROJEX!!! :exploding_head:
+
+## Installation
+To install, you can try:
+- [Downloading source code to use offline](https://github.com/urojex/urojex/archive/refs/heads/master.zip).
+- Use CDN at [jsDelivr](https://www.jsdelivr.com/package/gh/urojex/urojex).
+- Fast start by package manager (comming soon).
