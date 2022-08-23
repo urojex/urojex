@@ -11,3 +11,6 @@ To install, you can try:
 - [Downloading source code to use offline](https://github.com/urojex/urojex/archive/refs/heads/master.zip).
 - Use CDN at [jsDelivr](https://www.jsdelivr.com/package/gh/urojex/urojex).
 - Fast start by package manager (comming soon).
+- Addition assets
+  - Font: [CDN right here at jsDelivr](https://cdn.jsdelivr.net/gh/urojex/urojex@0.0.1-beta/font/stylesheet.min.css) :)
+  - Examples file: [Get code at jsDelivr too](https://cdn.jsdelivr.net/gh/urojex/urojex@0.0.1-beta/test/index.html)
