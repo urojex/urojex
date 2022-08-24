@@ -1,4 +1,4 @@
-<div align="center"><img src="https://www.linkpicture.com/q/urojex.png" type="image" height="100"></div>
+<img src="https://www.linkpicture.com/q/urojex.png" type="image" height="100">
   
 # [UROJEX]() &middot; [![GitHub license](https://img.shields.io/github/license/urojex/urojex)](https://github.com/urojex/urojex/blob/master/LICENSE) [![GitHub stars](https://img.shields.io/github/stars/urojex/urojex)](https://github.com/urojex/urojex/stargazers) [![JsDelivr](https://data.jsdelivr.com/v1/package/gh/urojex/urojex/badge)](https://www.jsdelivr.com/package/gh/urojex/urojex)
 Urojex is a simple and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.
