@@ -1,11 +1,12 @@
 {
-  "name": "urojex",
-  "version": "1.0.0",
+  "name": "@urj/urojex",
+  "version": "0.0.1-beta",
   "description": "Urojex is a simple, modular and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.",
   "main": "src/urojex.js",
   "directories": {
     "test": "test"
   },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +15,7 @@
     "url": "git+https://github.com/urojex/urojex.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Hai Nguyen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/urojex/urojex/issues"
