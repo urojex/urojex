@@ -1,14 +1,14 @@
 {
-  "name": "urojex",
+  "name": "@devliwn/urojex",
   "version": "0.0.1-beta",
   "description": "Urojex is a simple, modular and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.",
   "main": "src/urojex.js",
   "directories": {
     "test": "test"
   },
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node node_modules/webpack/bin/webpack.js --mode production --watch --progress",
+    "build": "node node_modules/webpack/bin/webpack.js --mode production --progress"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/urojex/urojex/issues"
   },
-  "homepage": "https://github.com/urojex/urojex#readme"
+  "homepage": "https://github.com/urojex/urojex#readme",
+  "dependencies": {
+    "@devliwn/urojex": "^0.0.1-beta"
+  },
+  "devDependencies": {
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
 }
