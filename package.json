@@ -1,5 +1,5 @@
 {
-  "name": "@devliwn/urojex",
+  "name": "urojex",
   "version": "0.0.1-beta",
   "description": "Urojex is a simple, modular and accessible component library that gives you the building blocks you need to build without ever leaving your HTML.",
   "main": "dist/urojex.min.js",
